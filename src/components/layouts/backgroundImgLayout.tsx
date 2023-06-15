@@ -6,16 +6,20 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   display: flex;
   justify-content: space-between;
+  height: 100vh;
 `;
 
 const StyledImage = styled(Image)`
-  width: 50vw;
-  height: 100vh;
+  width: calc(40% - 1rem);
+  height: calc(90% - 2rem);
+  margin: auto;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.25);
 `;
 
 const Container = styled.div`
   width: 50vw;
-  height: 100vh;
+  height: 100%;
 `;
 
 type childrenProp = {
