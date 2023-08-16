@@ -1,12 +1,9 @@
+"use client";
+
 import styled from "styled-components";
 import userSvg from "@/public/user.svg";
 import passwordSvg from "@/public/password.svg";
 import Image from "next/image";
-
-type FormInputProps = {
-  name: string;
-  inputType: string;
-};
 
 const Wrapper = styled.div`
   width: 30rem;
@@ -15,7 +12,7 @@ const Wrapper = styled.div`
   margin-bottom: 1rem;
 `;
 
-const StyledInput = styled.input`
+const Input = styled.input`
   position: absolute;
   width: inherit;
   height: inherit;
@@ -55,7 +52,7 @@ const StyledInput = styled.input`
   }
 `;
 
-const StyledSvg = styled(Image)`
+const Svg = styled(Image)`
   width: 3rem;
   height: 3rem;
   position: absolute;
@@ -79,13 +76,31 @@ function chooseInputType(inputType: string) {
   }
 }
 
-export default function FormInput({ name, inputType }: FormInputProps) {
+type FormInputProps = {
+  name: string;
+  inputType: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export default function FormInput({
+  name,
+  inputType,
+  value,
+  onChange,
+}: FormInputProps) {
   const iconType = () => chooseIcon(inputType);
   const type = () => chooseInputType(inputType);
   return (
     <Wrapper>
-      <StyledInput type={type()} name={name.toLowerCase()} placeholder={name} />
-      <StyledSvg src={iconType()} alt="input_icon" />
+      <Input
+        type={type()}
+        name={name.toLowerCase()}
+        placeholder={name}
+        value={value}
+        onChange={onChange}
+      />
+      <Svg src={iconType()} alt="input icon" />
       <label htmlFor={name.toLowerCase()}>{name}</label>
     </Wrapper>
   );

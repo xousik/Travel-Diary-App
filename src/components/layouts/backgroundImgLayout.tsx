@@ -1,7 +1,10 @@
+"use client";
+
 import styled from "styled-components";
 import Image from "next/image";
 import backgroundImg from "@/public/backgroundImg.jpg";
 import Tilt from "react-parallax-tilt";
+import React from "react";
 
 const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
@@ -36,11 +39,11 @@ const Container = styled.div`
   height: 100%;
 `;
 
-type childrenProp = {
+export default function BackgroundImgLayout({
+  children,
+}: {
   children: React.ReactNode;
-};
-
-export default function BackgroundImgLayout({ children }: childrenProp) {
+}) {
   return (
     <Wrapper>
       <Container>{children}</Container>
