@@ -66,6 +66,7 @@ function chooseIcon(inputType: string) {
   } else if (inputType === "password") {
     return passwordSvg;
   }
+  return userSvg;
 }
 
 function chooseInputType(inputType: string) {
@@ -101,7 +102,7 @@ export default function FormInput({
         onChange={onChange}
       />
       <Svg src={iconType()} alt="input icon" />
-      <label htmlFor={name.toLowerCase()}>{name}</label>
+      <label htmlFor={name.toLowerCase()} />
     </Wrapper>
   );
 }

@@ -20,19 +20,22 @@ const RegisterLink = styled(Link)`
   text-decoration: none;
 `;
 
-const ForgotPasswordLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.darkGrey};
-  font-size: ${({ theme }) => theme.fontSize.s};
-  font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-  text-decoration: none;
-`;
+//  TODO:  Consider if I want to log in with credentialls or email, if emaill i don't need that bellow
+
+// const ForgotPasswordLink = styled(Link)`
+//   color: ${({ theme }) => theme.colors.darkGrey};
+//   font-size: ${({ theme }) => theme.fontSize.s};
+//   font-weight: ${({ theme }) => theme.fontWeight.semiBold};
+//   text-decoration: none;
+// `;
 
 export default function LoginForm() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState<string>("");
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    signIn();
+
+    signIn("email", { email, callbackUrl: "http://localhost:3000/logedin" });
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +43,7 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(e: FormEvent) => handleSubmit(e)}>
       <Input
         name="E-mail"
         inputType="email"
@@ -49,7 +52,6 @@ export default function LoginForm() {
       />
       <InnerWrapper>
         <RegisterLink href="/register">Register</RegisterLink>
-        <ForgotPasswordLink href="">Forgot Password</ForgotPasswordLink>
         <PrimaryButton type="submit">Sign In</PrimaryButton>
       </InnerWrapper>
     </form>

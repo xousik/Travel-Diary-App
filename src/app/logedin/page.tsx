@@ -1,5 +1,4 @@
 import BackgroundImgLayout from "../../components/layouts/backgroundImgLayout";
-import MainTitle from "../../components/atoms/mainTitle";
 import PrimaryButton from "@/src/components/atoms/primaryButton";
 import TravelCard from "@/src/components/molecules/travelCard";
 import arrowRight from "../../../public/arrowRight.svg";
@@ -8,8 +7,14 @@ import LogedHeader from "@/src/components/molecules/logedHeader";
 import { Wrapper } from "./page.styles";
 import { TravelCardsWrapper } from "./page.styles";
 import { InnerWrapper } from "./page.styles";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
-export default function logedin() {
+export default async function logedin() {
+  const session = await getServerSession(authOptions);
+  if (!session) redirect("/");
+
   return (
     <BackgroundImgLayout>
       <LogedHeader />
