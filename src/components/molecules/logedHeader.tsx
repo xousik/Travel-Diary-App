@@ -11,12 +11,16 @@ const HeaderWrapper = styled.div`
   align-items: center;
 `;
 
-export default function LogedHeader() {
+type userName = {
+  userName: string;
+};
+
+export default function LogedHeader({ userName }: userName) {
   return (
     <HeaderWrapper>
       <MainTitle issmall />
       <button onClick={() => signOut()}>Log out</button>
-      <LogedUser />
+      <LogedUser userName={userName} />
     </HeaderWrapper>
   );
 }

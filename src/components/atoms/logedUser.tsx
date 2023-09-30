@@ -14,10 +14,14 @@ const Wrapper = styled.div`
   color: ${({ theme }) => theme.colors.black};
 `;
 
-export default function LogedUser() {
+type userName = {
+  userName: string;
+};
+
+export default function LogedUser({ userName }: userName) {
   return (
     <Wrapper>
-      Patryk
+      {userName}
       <Image src={user} alt="user iccon" width={40} />
     </Wrapper>
   );

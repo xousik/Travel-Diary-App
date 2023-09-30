@@ -12,12 +12,18 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 
 export default async function logedin() {
+  let name;
   const session = await getServerSession(authOptions);
-  if (!session) redirect("/");
+  if (session) {
+    // name: string
+    name = session.user?.name;
+  } else {
+    redirect("/");
+  }
 
   return (
     <BackgroundImgLayout>
-      <LogedHeader />
+      <LogedHeader userName={name!} />
       <Wrapper>
         <PrimaryButton width={18} height={4.7} fontSize={30}>
           Create new diary
