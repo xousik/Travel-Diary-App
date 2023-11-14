@@ -35,7 +35,10 @@ export default function LoginForm() {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    signIn("email", { email, callbackUrl: "http://localhost:3000/logedin" });
+    signIn("email", {
+      email,
+      callbackUrl: "http://localhost:3000/logedin",
+    });
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

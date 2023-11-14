@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 3.5rem;
+  row-gap: 3rem;
 `;
 
 export const TravelCardsWrapper = styled.div`

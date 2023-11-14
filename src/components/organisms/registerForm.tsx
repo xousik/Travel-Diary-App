@@ -33,42 +33,12 @@ export default function RegisterForm() {
     setName(event.target.value);
   };
 
-  type newUser = {
-    data: {
-      name: string;
-      email: string;
-    };
-  };
-
-  // Example POST method implementation:
-  async function postData(url: string, data: {}) {
-    console.log(JSON.stringify(data));
-    // Default options are marked with *
-    const response = await fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-
-      body: JSON.stringify(data), // body data type must match "Content-Type" header
-    });
-    return response; // parses JSON response into native JavaScript objects
-  }
-
-  // postData("https://example.com/answer", { answer: 42 }).then((data) => {
-  //   console.log(data); // JSON data parsed by `data.json()` call
-  // });
-
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
     console.log("Signing up");
 
     const submitData = { name, email };
-
-    // await createUser(email, name);
 
     try {
       const res = await fetch("http://localhost:3000/api/user", {
@@ -78,19 +48,20 @@ export default function RegisterForm() {
           "content-type": "application/json",
         },
       });
-      if (res.ok) {
-        console.log("Yay!");
-      } else {
-        console.log("Oops! Something is wrong.");
+      if (res.status === 200) {
+        signIn("email", {
+          email,
+          callbackUrl: "http://localhost:3000/logedin",
+        });
+      } else if (res.status === 409) {
+        console.log("The user already exists");
+        console.log(res);
+        alert("The user already exists");
       }
     } catch (error) {
+      // TODO: How to properly handle errors ?
       console.log(error);
     }
-
-    signIn("email", {
-      email,
-      callbackUrl: "http://localhost:3000/logedin",
-    });
   };
 
   return (
