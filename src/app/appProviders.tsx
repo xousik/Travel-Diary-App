@@ -3,6 +3,7 @@
 import { ThemeProvider } from "styled-components";
 import { theme } from "./css/theme";
 import { EB_Garamond } from "next/font/google";
+import { ShowMoreButtonContextProvider } from "../context/showMoreButtonContext";
 import StyledComponentsRegistry from "@/src/lib/registry";
 import styled from "styled-components";
 import React from "react";
@@ -20,9 +21,11 @@ export default function AppProviders({
 }) {
   return (
     <ThemeProvider theme={theme}>
-      <StyledBody className={garamond.className}>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-      </StyledBody>
+      <ShowMoreButtonContextProvider>
+        <StyledBody className={garamond.className}>
+          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        </StyledBody>
+      </ShowMoreButtonContextProvider>
     </ThemeProvider>
   );
 }

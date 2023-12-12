@@ -5,9 +5,8 @@ import styled from "styled-components";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { FormEvent, useState } from "react";
-import { prisma } from "@/src/lib/prisma";
 import PrimaryButton from "../atoms/primaryButton";
-
+import { useRouter } from "next/navigation";
 const InnerWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -24,6 +23,8 @@ const LoginLink = styled(Link)`
 export default function RegisterForm() {
   const [email, setEmail] = useState<string>("");
   const [name, setName] = useState<string>("");
+
+  const router = useRouter();
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -55,8 +56,8 @@ export default function RegisterForm() {
         });
       } else if (res.status === 409) {
         console.log("The user already exists");
-        console.log(res);
-        alert("The user already exists");
+        alert("The user already exists, You can log in.");
+        setTimeout(() => router.push("/"), 1000);
       }
     } catch (error) {
       // TODO: How to properly handle errors ?

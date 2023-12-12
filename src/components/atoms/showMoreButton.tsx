@@ -2,16 +2,20 @@
 
 import { useState } from "react";
 import styled from "styled-components";
+import { useContext } from "react";
+import { ShowMoreButtonContext } from "@/src/context/showMoreButtonContext";
 
-const Button = styled.button<{ isActive: boolean }>`
+const Button = styled.button`
   display: flex;
   align-items: center;
   column-gap: 1rem;
   border: none;
   background: transparent;
   cursor: pointer;
-  color: ${({ isActive }) => (isActive ? "green" : "red")};
 `;
+
+type setIsActive = (value: (prev: boolean) => boolean) => void;
+/* Weird type but it means that setIsActive is a function which returns void and takes another function as an argument which function returns inverse boolean value of previous state */
 
 export default function ShowMoreButton({
   children,
@@ -19,12 +23,12 @@ export default function ShowMoreButton({
   // TODO: Check that type
   children: React.ReactNode;
 }) {
-  const [isActive, setIsActive] = useState<boolean>(false);
-
-  console.log(isActive);
+  const { setIsActive }: { setIsActive?: setIsActive } = useContext(
+    ShowMoreButtonContext
+  );
 
   return (
-    <Button isActive={isActive} onClick={() => setIsActive((prev) => !prev)}>
+    <Button onClick={() => setIsActive!((prev: boolean) => !prev)}>
       {children}
     </Button>
   );

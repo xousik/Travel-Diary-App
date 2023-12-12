@@ -10,7 +10,6 @@ import { TravelCardsWrapper } from "./page.styles";
 import { InnerWrapper } from "./page.styles";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import { redirect } from "next/navigation";
 
 export default async function logedin() {
   let name;
@@ -22,7 +21,7 @@ export default async function logedin() {
     // name: string
     name = session.user?.name;
   } else {
-    redirect("/");
+    // redirect("/");
   }
 
   return (
