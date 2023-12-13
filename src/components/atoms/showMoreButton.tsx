@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import styled from "styled-components";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { ShowMoreButtonContext } from "@/src/context/showMoreButtonContext";
 
 const Button = styled.button`

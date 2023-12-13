@@ -1,6 +1,6 @@
-import "./css/globals.css";
-import AppProviders from "./appProviders";
 import React from "react";
+import AppProviders from "./appProviders";
+import "./css/globals.css";
 
 const metadata = {
   title: "Travel Diary App",

@@ -1,11 +1,11 @@
 "use client";
 
-import Input from "../atoms/formInput";
 import styled from "styled-components";
 import Link from "next/link";
+import Input from "../atoms/formInput";
+import PrimaryButton from "../atoms/primaryButton";
 import { signIn } from "next-auth/react";
 import { FormEvent, useState } from "react";
-import PrimaryButton from "../atoms/primaryButton";
 
 const InnerWrapper = styled.div`
   display: flex;

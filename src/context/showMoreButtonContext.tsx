@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useContext, createContext } from "react";
-
-// It needs to be in client component,
+import { useState, createContext } from "react";
 
 export const ShowMoreButtonContext = createContext({});
 
-export const ShowMoreButtonContextProvider = ({ children }: any) => {
+export const ShowMoreButtonContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [isActive, setIsActive] = useState<boolean>(true);
 
   console.log(isActive);

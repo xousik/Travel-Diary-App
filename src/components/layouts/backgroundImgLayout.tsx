@@ -4,8 +4,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import backgroundImg from "@/public/backgroundImg.jpg";
 import Tilt from "react-parallax-tilt";
-import React from "react";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { ShowMoreButtonContext } from "@/src/context/showMoreButtonContext";
 
 // import { ShowMoreButtonContext } from "@/src/context/ShowMoreButtonContext";

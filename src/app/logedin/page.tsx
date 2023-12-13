@@ -5,9 +5,7 @@ import ShowMoreButton from "@/src/components/atoms/showMoreButton";
 import arrowRight from "../../../public/arrowRight.svg";
 import Image from "next/image";
 import LogedHeader from "@/src/components/molecules/logedHeader";
-import { Wrapper } from "./page.styles";
-import { TravelCardsWrapper } from "./page.styles";
-import { InnerWrapper } from "./page.styles";
+import { Wrapper, TravelCardsWrapper, InnerWrapper } from "./page.styles";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 

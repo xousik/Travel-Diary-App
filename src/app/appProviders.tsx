@@ -1,12 +1,11 @@
 "use client";
 
-import { ThemeProvider } from "styled-components";
+import React from "react";
+import StyledComponentsRegistry from "@/src/lib/registry";
+import styled, { ThemeProvider } from "styled-components";
 import { theme } from "./css/theme";
 import { EB_Garamond } from "next/font/google";
 import { ShowMoreButtonContextProvider } from "../context/showMoreButtonContext";
-import StyledComponentsRegistry from "@/src/lib/registry";
-import styled from "styled-components";
-import React from "react";
 
 const garamond = EB_Garamond({ subsets: ["latin"] });
 
