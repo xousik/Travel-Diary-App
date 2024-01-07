@@ -1,7 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { ShowMoreButtonContext } from "@/src/context/showMoreButtonContext";
 
 const Button = styled.button`
@@ -11,9 +11,12 @@ const Button = styled.button`
   border: none;
   background: transparent;
   cursor: pointer;
+  text-decoration: none;
 `;
 
-type setIsActive = (value: (prev: boolean) => boolean) => void;
+type setIsActive = (
+  value: (prev: boolean) => boolean
+) => React.MouseEventHandler<HTMLButtonElement> | undefined;
 /* Weird type but it means that setIsActive is a function which returns void and takes another function as an argument which function returns inverse boolean value of previous state */
 
 export default function ShowMoreButton({
@@ -27,8 +30,6 @@ export default function ShowMoreButton({
   );
 
   return (
-    <Button onClick={() => setIsActive!((prev: boolean) => !prev)}>
-      {children}
-    </Button>
+    <Button onClick={() => setIsActive!((prev) => !prev)}>{children}</Button>
   );
 }

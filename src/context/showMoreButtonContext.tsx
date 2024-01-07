@@ -9,7 +9,7 @@ export const ShowMoreButtonContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [isActive, setIsActive] = useState<boolean>(true);
+  const [isActive, setIsActive] = useState<boolean>(false);
 
   console.log(isActive);
 

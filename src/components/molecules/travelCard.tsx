@@ -20,7 +20,7 @@ const InnerWrapper = styled.div`
   color: ${({ theme }) => theme.colors.brown};
   font-weight: ${({ theme }) => theme.fontWeight.semiBold};
 
-  h2 {
+  h3 {
     font-size: ${({ theme }) => theme.fontSize.l};
   }
   span {
@@ -32,7 +32,7 @@ export default function TravelCard() {
   return (
     <Wrapper>
       <InnerWrapper>
-        <h2>Babia Góra</h2>
+        <h3>Babia Góra</h3>
         <span> 03.06.2023</span>
       </InnerWrapper>
       <Image src={mountainSVG} alt="mountain icon" width={60} />
