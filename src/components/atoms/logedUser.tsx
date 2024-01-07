@@ -6,11 +6,11 @@ import user from "../../../public/user.svg";
 
 const Wrapper = styled.div`
   display: flex;
+  padding-right: 1rem;
   justify-content: space-between;
   align-items: center;
   column-gap: 0.5rem;
   font-size: ${({ theme }) => theme.fontSize.l};
-  /* font-weight: ${({ theme }) => theme.fontWeight.semiBold}; */
   color: ${({ theme }) => theme.colors.black};
 `;
 

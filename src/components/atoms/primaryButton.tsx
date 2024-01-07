@@ -1,7 +1,6 @@
 "use client";
 
 import styled from "styled-components";
-import { useRouter } from "next/navigation";
 
 const Button = styled.button<{
   width?: number;
@@ -41,8 +40,6 @@ export default function PrimaryButton({
   height,
   fontSize,
 }: ButtonProps) {
-  const router = useRouter();
-
   return (
     <Button type={type} width={width} height={height} fontSize={fontSize}>
       {children}

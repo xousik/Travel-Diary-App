@@ -9,6 +9,7 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 8%;
 `;
 
 type userName = {
@@ -18,7 +19,7 @@ type userName = {
 export default function LogedHeader({ userName }: userName) {
   return (
     <HeaderWrapper>
-      <MainTitle issmall />
+      <MainTitle issmall isnavtitle />
       <button onClick={() => signOut()}>Log out</button>
       <LogedUser userName={userName} />
     </HeaderWrapper>

@@ -4,31 +4,22 @@ import styled from "styled-components";
 import Image from "next/image";
 import backgroundImg from "@/public/backgroundImg.jpg";
 import Tilt from "react-parallax-tilt";
-import React, { useContext } from "react";
-import { ShowMoreButtonContext } from "@/src/context/showMoreButtonContext";
-
-// import { ShowMoreButtonContext } from "@/src/context/ShowMoreButtonContext";
 
 const Wrapper = styled.div`
-  background-color: ${({ theme }) => theme.colors.background};
   display: flex;
   justify-content: space-between;
-  height: 100vh;
-  width: 100vw;
+  height: 92%;
+  width: 100%;
 `;
 
 const StyledImage = styled(Image)`
-  /* width: calc(40% - 1rem);
-  height: calc(90% - 2rem); */
   width: 100%;
   height: 100%;
-  /* margin: auto; */
   border-radius: 1rem;
   box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.25);
 `;
 
-const StyledTilt = styled(Tilt)<{ isvisible: number }>`
-  display: ${({ isvisible }) => (isvisible ? "block" : "none")};
+const StyledTilt = styled(Tilt)`
   width: calc(40% - 1rem);
   height: calc(90% - 2rem);
   margin: auto;
@@ -48,9 +39,6 @@ export default function BackgroundImgLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isActive }: { isActive?: boolean } = useContext(
-    ShowMoreButtonContext
-  );
   return (
     <Wrapper>
       <Container>{children}</Container>
@@ -60,7 +48,6 @@ export default function BackgroundImgLayout({
         tiltMaxAngleY={5}
         scale={0.95}
         transitionSpeed={2000}
-        isvisible={+isActive!}
       >
         <StyledImage src={backgroundImg} alt="campervan on desert" />
       </StyledTilt>
