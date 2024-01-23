@@ -17,12 +17,17 @@
   3. Add accessible line-height
   4. Improve text rendering
 */
+html {
+  height: 100vh;
+}
+
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   font-size: 62.5%;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
+  /* overflow: hidden; */
 }
 /*
   5. Improve media defaults

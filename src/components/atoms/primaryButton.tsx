@@ -31,6 +31,7 @@ type ButtonProps = {
   width?: number;
   height?: number;
   fontSize?: number;
+  onClick?: any;
 };
 
 export default function PrimaryButton({
@@ -39,9 +40,16 @@ export default function PrimaryButton({
   width,
   height,
   fontSize,
+  onClick,
 }: ButtonProps) {
   return (
-    <Button type={type} width={width} height={height} fontSize={fontSize}>
+    <Button
+      onClick={onClick && (() => onClick((prev: boolean) => !prev))}
+      type={type}
+      width={width}
+      height={height}
+      fontSize={fontSize}
+    >
       {children}
     </Button>
   );

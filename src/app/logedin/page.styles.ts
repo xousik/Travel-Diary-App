@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
 `;
 
 export const TravelCardsWrapper = styled.div`
+  height: 100%;
   max-height: 84%;
   display: flex;
   flex-direction: column;

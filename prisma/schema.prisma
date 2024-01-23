@@ -54,3 +54,16 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+// model Image {
+//   id Int @id @default(autoincrement())
+//   file String
+//   file_name String
+// }
+
+// model TravelDiary {
+//   id Int @id @default(autoincrement())
+//   title String
+//   description String
+//   date DateTime
+// }
