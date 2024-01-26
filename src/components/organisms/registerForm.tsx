@@ -38,8 +38,6 @@ export default function RegisterForm() {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    console.log("Signing up");
-
     const submitData = { name, email };
 
     try {
@@ -56,7 +54,6 @@ export default function RegisterForm() {
           callbackUrl: "http://localhost:3000/logedin",
         });
       } else if (res.status === 409) {
-        console.log("The user already exists");
         alert("The user already exists, You can log in.");
         setTimeout(() => router.push("/"), 1000);
       }

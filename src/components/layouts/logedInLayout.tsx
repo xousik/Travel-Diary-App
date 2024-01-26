@@ -1,6 +1,6 @@
 "use client";
 
-import ShowMore from "@/src/components/layouts/showMore";
+import LogedInShowMore from "@/src/components/layouts/logedInShowMore";
 import LogedInDefault from "./logedInDefault";
 import { ShowMoreButtonContext } from "@/src/context/showMoreButtonContext";
 import { useContext } from "react";
@@ -11,7 +11,7 @@ export default function LogedinLayout({ userName }: { userName: string }) {
   );
 
   return isActive ? (
-    <ShowMore userName={userName!} />
+    <LogedInShowMore userName={userName!} />
   ) : (
     <LogedInDefault userName={userName!} />
   );

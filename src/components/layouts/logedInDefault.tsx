@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import BackgroundImgLayout from "./backgroundImgLayout";
 import PrimaryButton from "@/src/components/atoms/primaryButton";
 import TravelCard from "@/src/components/molecules/travelCard";
@@ -14,12 +15,18 @@ import {
 } from "@/src/app/logedin/page.styles";
 
 export default function LogedInDefault({ userName }: { userName: string }) {
+  const [isActive, setIsActive] = useState<boolean>(false);
   return (
     <>
       <LogedHeader userName={userName!} />
-      <BackgroundImgLayout>
+      <BackgroundImgLayout isactive={isActive}>
         <Wrapper>
-          <PrimaryButton width={15} height={4.4} fontSize={30}>
+          <PrimaryButton
+            onClick={setIsActive}
+            width={15}
+            height={4.4}
+            fontSize={30}
+          >
             Create new diary
           </PrimaryButton>
           <InnerWrapper>

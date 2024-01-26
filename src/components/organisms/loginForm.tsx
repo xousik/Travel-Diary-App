@@ -46,7 +46,7 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={(e: FormEvent) => handleSubmit(e)}>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <Input
         name="E-mail"
         inputType="email"

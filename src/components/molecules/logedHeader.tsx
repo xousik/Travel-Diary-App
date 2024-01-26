@@ -12,6 +12,10 @@ const HeaderWrapper = styled.div`
   height: 8%;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+`;
+
 type userName = {
   userName: string;
 };
@@ -20,8 +24,10 @@ export default function LogedHeader({ userName }: userName) {
   return (
     <HeaderWrapper>
       <MainTitle issmall isnavtitle />
-      <button onClick={() => signOut()}>Log out</button>
-      <LogedUser userName={userName} />
+      <Wrapper>
+        <button onClick={() => signOut()}>Log out</button>
+        <LogedUser userName={userName} />
+      </Wrapper>
     </HeaderWrapper>
   );
 }

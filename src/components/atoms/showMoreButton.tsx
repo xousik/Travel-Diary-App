@@ -12,6 +12,8 @@ const Button = styled.button`
   background: transparent;
   cursor: pointer;
   text-decoration: none;
+  font-size: ${({ theme }) => theme.fontSize.s};
+  font-weight: ${({ theme }) => theme.fontWeight.semiBold};
 `;
 
 type setIsActive = (

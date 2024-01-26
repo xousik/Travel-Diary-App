@@ -16,11 +16,11 @@ export const authOptions: NextAuthOptions = {
           email,
         },
       });
-      console.log(currentUser);
       if (currentUser) {
         return true;
+      } else {
+        return "/register";
       }
-      return "/register";
     },
   },
   providers: [
