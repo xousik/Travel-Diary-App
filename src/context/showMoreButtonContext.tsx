@@ -11,8 +11,6 @@ export const ShowMoreButtonContextProvider = ({
 }) => {
   const [isActive, setIsActive] = useState<boolean>(false);
 
-  console.log(isActive);
-
   return (
     <ShowMoreButtonContext.Provider value={{ isActive, setIsActive }}>
       {children}

@@ -64,11 +64,6 @@ export default function CreateNewDiaryForm() {
           "content-type": "application/json",
         },
       });
-      if (res.status === 200) {
-        console.log("Form data successfully sent to the server");
-      } else {
-        console.log("Error occureed");
-      }
     } catch (error) {
       // TODO: How to properly handle errors ?
       console.log(error);

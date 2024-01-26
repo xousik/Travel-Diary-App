@@ -3,8 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const data = await req.json();
-  console.log(`User data recived by api: ${data.email}`);
-
   const doesUserExist = await prisma.user.findFirst({
     where: {
       email: data.email,
@@ -18,7 +16,6 @@ export async function POST(req: NextRequest) {
         name: data.name,
       },
     });
-    console.log(`New user just created: ${newUser}`);
     return NextResponse.json({ message: "New user created" }, { status: 200 });
   } else {
     return NextResponse.json(
