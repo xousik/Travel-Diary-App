@@ -70,12 +70,14 @@ export default function RegisterForm() {
         inputType="email"
         value={email}
         onChange={(e) => handleEmailChange(e)}
+        hasIcon={true}
       />
       <Input
         name="Name"
         inputType="name"
         value={name}
         onChange={(e) => handleNameChange(e)}
+        hasIcon={true}
       />
       <InnerWrapper>
         <LoginLink href="/">Log In</LoginLink>

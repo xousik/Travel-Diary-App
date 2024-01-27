@@ -1,21 +1,23 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useRef } from "react";
 import styled from "styled-components";
 import PrimaryButton from "../atoms/primaryButton";
-import { stringify } from "querystring";
+import addImg from "@/public/addImg.svg";
+import Image from "next/image";
 
 const StyledForm = styled.form`
   width: 100%;
   height: 100%;
-  /* display: flex; */
-  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   z-index: 9;
 `;
 
 const Input = styled.input`
   height: 4rem;
-  width: 80%;
+  width: 70%;
   margin-top: 2rem;
   border: 0.15rem solid ${({ theme }) => theme.colors.darkGrey};
   border-radius: 1rem;
@@ -25,8 +27,10 @@ const Input = styled.input`
   color: ${({ theme }) => theme.colors.brown};
   text-align: center;
 
-  &:first-child {
-    /* width: 17rem; */
+  &:nth-child(3) {
+    width: 14rem;
+    color: ${({ theme }) => theme.colors.darkGrey};
+    cursor: pointer;
   }
 `;
 
@@ -38,23 +42,79 @@ const StyledTextarea = styled.textarea`
   padding: 0 1rem;
   color: ${({ theme }) => theme.colors.brown};
   text-align: center;
-  width: 90%;
-  height: 60%;
+  width: 85%;
+  height: 35%;
   margin-top: 2rem;
 `;
 
-export default function CreateNewDiaryForm() {
+const ImageInputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem 0 3rem 0;
+`;
+
+const ImageInputLabel = styled.label`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ImageInput = styled.input`
+  display: none;
+`;
+
+export default function CreateNewDiaryForm({
+  handleRefresh,
+}: {
+  handleRefresh: () => void;
+}) {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [date, setDate] = useState<string>("");
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
+  };
+
+  const handleDescriptionChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setDescription(event.target.value);
+  };
+
+  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDate(event.target.value);
+  };
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (file) {
+      // You can use FileReader to read the image and convert it to a data URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleIconClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const submitData = { title, description };
+    const submitData = { title, description, date };
 
     try {
       await fetch("http://localhost:3000/api/diary", {
@@ -67,9 +127,9 @@ export default function CreateNewDiaryForm() {
 
       setTitle("");
       setDescription("");
+      handleRefresh();
 
-      // TODO: Redo it on some cool pop out box info
-      alert("Pomyślnie dodano wspomnienie :)");
+      // TODO: Add some cool pop out box info " Correctly added new Diary! "
     } catch (error) {
       // TODO: How to properly handle errors ?
       console.log(error);
@@ -83,19 +143,31 @@ export default function CreateNewDiaryForm() {
         type="title"
         placeholder="Title"
         value={title}
-        onChange={(e) => handleChange(e)}
+        onChange={(e) => handleTitleChange(e)}
       />
-      {/* <Input
-        name="date"
-        type="date"
-        value=""
-        // onChange={(e) => handleChange(e)}
-      /> */}
       <StyledTextarea
         value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={(e) => handleDescriptionChange(e)}
         placeholder="Description"
       />
+      <Input
+        name="date"
+        type="date"
+        value={date}
+        onChange={(e) => handleDateChange(e)}
+      />
+      <ImageInputContainer>
+        <ImageInputLabel onClick={handleIconClick}>
+          <Image src={addImg} alt="Add image icon" height={75} width={75} />
+        </ImageInputLabel>
+        <ImageInput
+          ref={fileInputRef}
+          name="image"
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+        />
+      </ImageInputContainer>
       <PrimaryButton type="submit">Add diary</PrimaryButton>
     </StyledForm>
   );

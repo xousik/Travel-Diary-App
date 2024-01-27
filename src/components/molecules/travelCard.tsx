@@ -29,12 +29,17 @@ const InnerWrapper = styled.div`
   }
 `;
 
-export default function TravelCard({ title }: { title?: string }) {
+type TravelCardProps = {
+  title?: string;
+  date?: string;
+};
+
+export default function TravelCard({ title, date }: TravelCardProps) {
   return (
     <Wrapper>
       <InnerWrapper>
         <h3>{title}</h3>
-        <span> 03.06.2023</span>
+        <span>{date}</span>
       </InnerWrapper>
       <Image src={mountainSVG} alt="mountain icon" width={60} />
     </Wrapper>

@@ -32,6 +32,7 @@ CREATE TABLE "Diary" (
     "userId" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
+    "date" TEXT NOT NULL,
 
     CONSTRAINT "Diary_pkey" PRIMARY KEY ("id")
 );

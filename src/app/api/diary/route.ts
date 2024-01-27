@@ -25,6 +25,7 @@ export async function POST(req: NextRequest) {
       userId: currentUser!.id,
       title: data.title,
       description: data.description,
+      date: data.date,
     },
   });
   return NextResponse.json({

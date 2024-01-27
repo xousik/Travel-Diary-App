@@ -19,11 +19,18 @@ type Diary = {
   userId: string;
   title: string;
   description: string;
+  date: string;
 };
 
 export default function LogedInDefault({ userName }: { userName: string }) {
   const [isActive, setIsActive] = useState<boolean>(false);
   const [diaries, setDiaries] = useState<Diary[]>([]);
+  const [refresh, setRefresh] = useState<boolean>(false);
+
+  const handleRefresh = () => {
+    // Toggle the state to trigger a re-render of the child component
+    setRefresh((prevRefresh) => !prevRefresh);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,12 +45,12 @@ export default function LogedInDefault({ userName }: { userName: string }) {
     };
 
     fetchData();
-  }, []);
+  }, [refresh]);
 
   return (
     <>
       <LogedHeader userName={userName!} />
-      <BackgroundImgLayout isactive={isActive}>
+      <BackgroundImgLayout isactive={isActive} handleRefresh={handleRefresh}>
         <Wrapper>
           <PrimaryButton
             onClick={setIsActive}
@@ -62,7 +69,11 @@ export default function LogedInDefault({ userName }: { userName: string }) {
           </InnerWrapper>
           <TravelCardsWrapper>
             {diaries.map((diary: Diary) => (
-              <TravelCard key={diary.id} title={diary.title} />
+              <TravelCard
+                key={diary.id}
+                title={diary.title}
+                date={diary.date}
+              />
             ))}
           </TravelCardsWrapper>
         </Wrapper>

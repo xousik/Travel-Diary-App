@@ -82,6 +82,7 @@ type FormInputProps = {
   inputType: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  hasIcon?: boolean;
 };
 
 export default function FormInput({
@@ -89,6 +90,7 @@ export default function FormInput({
   inputType,
   value,
   onChange,
+  hasIcon,
 }: FormInputProps) {
   const iconType = () => chooseIcon(inputType);
   const type = () => chooseInputType(inputType);
@@ -101,7 +103,7 @@ export default function FormInput({
         value={value}
         onChange={onChange}
       />
-      <Svg src={iconType()} alt="input icon" />
+      {hasIcon && <Svg src={iconType()} alt="input icon" />}
       <label htmlFor={name.toLowerCase()} />
     </Wrapper>
   );

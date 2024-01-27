@@ -82,9 +82,11 @@ const BackSide = styled.div`
 export default function BackgroundImgLayout({
   children,
   isactive,
+  handleRefresh,
 }: {
   children: React.ReactNode;
   isactive?: boolean | undefined;
+  handleRefresh?: () => void;
 }) {
   return (
     <Wrapper>
@@ -101,7 +103,7 @@ export default function BackgroundImgLayout({
             <StyledImage src={backgroundImg} alt="campervan on desert" />
           </StyledTilt>
           <BackSide>
-            <CreateNewDiaryForm />
+            <CreateNewDiaryForm handleRefresh={handleRefresh!} />
           </BackSide>
         </InnerWrapper>
       </OuterWrapper>
