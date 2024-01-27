@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   });
 
   if (!doesUserExist) {
-    const newUser = await prisma.user.create({
+    await prisma.user.create({
       data: {
         email: data.email,
         name: data.name,

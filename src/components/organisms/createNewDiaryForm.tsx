@@ -57,13 +57,19 @@ export default function CreateNewDiaryForm() {
     const submitData = { title, description };
 
     try {
-      const res = await fetch("http://localhost:3000/api/createDiary", {
+      await fetch("http://localhost:3000/api/diary", {
         method: "POST",
         body: JSON.stringify(submitData),
         headers: {
           "content-type": "application/json",
         },
       });
+
+      setTitle("");
+      setDescription("");
+
+      // TODO: Redo it on some cool pop out box info
+      alert("Pomyślnie dodano wspomnienie :)");
     } catch (error) {
       // TODO: How to properly handle errors ?
       console.log(error);

@@ -29,11 +29,11 @@ const InnerWrapper = styled.div`
   }
 `;
 
-export default function TravelCard() {
+export default function TravelCard({ title }: { title?: string }) {
   return (
     <Wrapper>
       <InnerWrapper>
-        <h3>Babia Góra</h3>
+        <h3>{title}</h3>
         <span> 03.06.2023</span>
       </InnerWrapper>
       <Image src={mountainSVG} alt="mountain icon" width={60} />
