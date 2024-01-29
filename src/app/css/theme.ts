@@ -16,6 +16,7 @@ export const theme = {
     l: "30px",
     m: "26px",
     s: "24px",
+    xs: "20px",
   },
   fontWeight: {
     medium: "500",

@@ -10,6 +10,10 @@ import ShowMoreButton from "../atoms/showMoreButton";
 import Image from "next/image";
 import arrowRight from "@/public/arrowRight.svg";
 
+const OuterWrapper = styled.div`
+  height: 100%;
+`;
+
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
@@ -22,11 +26,11 @@ const StyledTravelCardsWrapper = styled(TravelCardsWrapper)`
   display: grid;
   grid-template-columns: 50% 50%;
   justify-items: center;
-  padding: 1rem 0;
+  padding: 2rem 0;
 `;
 
 const StyledShowMoreButton = styled(ShowMoreButton)`
-  font-weight: ${({ theme }) => theme.fontWeight.bold};
+  /* font-weight: ${({ theme }) => theme.fontWeight.bold}; */
 `;
 
 const StyledImage = styled(Image)`
@@ -59,13 +63,13 @@ export default function LogedInShowMore({ userName }: { userName: string }) {
     fetchData();
   }, []);
   return (
-    <div>
+    <OuterWrapper>
       <LogedHeader userName={userName!} />
       {/* Year navigation */}
       <YearNavigation />
       <Wrapper>
         <StyledShowMoreButton>
-          <StyledImage src={arrowRight} width={25} alt="arrow right icon" />
+          <StyledImage src={arrowRight} width={20} alt="arrow right icon" />
           Show Less
         </StyledShowMoreButton>
       </Wrapper>
@@ -75,6 +79,6 @@ export default function LogedInShowMore({ userName }: { userName: string }) {
           <TravelCard key={diary.id} title={diary.title} date={diary.date} />
         ))}
       </StyledTravelCardsWrapper>
-    </div>
+    </OuterWrapper>
   );
 }

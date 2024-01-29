@@ -38,7 +38,9 @@ export default function LogedInDefault({ userName }: { userName: string }) {
         // Is that path ok ? Or should change it to work properly on production
         const response = await fetch("http://localhost:3000/api/diary");
         const data = await response.json();
-        setDiaries(data);
+
+        // Set max amount of travel cards to 3
+        setDiaries(data.slice(-3).reverse());
       } catch (error) {
         console.error("Error fetching user diaries:", error);
       }
@@ -50,7 +52,11 @@ export default function LogedInDefault({ userName }: { userName: string }) {
   return (
     <>
       <LogedHeader userName={userName!} />
-      <BackgroundImgLayout isactive={isActive} handleRefresh={handleRefresh}>
+      <BackgroundImgLayout
+        isLoged={true}
+        isactive={isActive}
+        handleRefresh={handleRefresh}
+      >
         <Wrapper>
           <PrimaryButton
             onClick={setIsActive}
@@ -64,7 +70,7 @@ export default function LogedInDefault({ userName }: { userName: string }) {
             <span>Recent diaries</span>
             <ShowMoreButton>
               Show more
-              <Image src={arrowRight} width={25} alt="arrow right icon" />
+              <Image src={arrowRight} width={20} alt="arrow right icon" />
             </ShowMoreButton>
           </InnerWrapper>
           <TravelCardsWrapper>

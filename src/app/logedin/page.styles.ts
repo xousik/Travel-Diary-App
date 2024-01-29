@@ -22,10 +22,11 @@ export const TravelCardsWrapper = styled.div`
 `;
 
 export const InnerWrapper = styled.div`
-  width: 65%;
+  width: 25rem;
   margin-top: 3rem;
   margin-bottom: 1.5rem;
-  font-size: ${({ theme }) => theme.fontSize.s};
+  font-size: ${({ theme }) => theme.fontSize.xs};
+  font-weight: ${({ theme }) => theme.fontWeight.semiBold};
   display: flex;
   justify-content: space-between;
 

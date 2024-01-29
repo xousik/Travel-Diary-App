@@ -9,7 +9,7 @@ const Button = styled.button<{
 }>`
   width: ${({ width }) => (width ? `${width}rem` : "9rem")};
   height: ${({ height }) => (height ? `${height}rem` : "4rem")};
-  background-color: ${({ theme }) => theme.colors.beige};
+  background-color: ${({ theme }) => theme.colors.darkBeige};
   border: none;
   border-radius: 1rem;
   font-size: ${({ theme, fontSize }) =>
@@ -19,9 +19,10 @@ const Button = styled.button<{
   cursor: pointer;
   transition: background-color 0.4s;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px 2px rgba(63, 32, 15, 0.8);
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.darkBeige};
+    background-color: rgba(52, 27, 7, 0.8);
   }
 `;
 

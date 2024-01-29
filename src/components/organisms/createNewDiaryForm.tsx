@@ -5,6 +5,8 @@ import styled from "styled-components";
 import PrimaryButton from "../atoms/primaryButton";
 import addImg from "@/public/addImg.svg";
 import Image from "next/image";
+import mountainSvg from "@/public/mountain.svg";
+import plusSvg from "@/public/plus.svg";
 
 const StyledForm = styled.form`
   width: 100%;
@@ -18,7 +20,7 @@ const StyledForm = styled.form`
 const Input = styled.input`
   height: 4rem;
   width: 70%;
-  margin-top: 2rem;
+  margin-top: 1rem;
   border: 0.15rem solid ${({ theme }) => theme.colors.darkGrey};
   border-radius: 1rem;
   outline: none;
@@ -48,11 +50,12 @@ const StyledTextarea = styled.textarea`
 `;
 
 const ImageInputContainer = styled.div`
+  position: relative;
   display: flex;
-  flex-direction: column;
+  column-gap: 6rem;
   align-items: center;
   justify-content: center;
-  margin: 3rem 0 3rem 0;
+  margin: 1.5rem 0 4rem 0;
 `;
 
 const ImageInputLabel = styled.label`
@@ -66,6 +69,40 @@ const ImageInput = styled.input`
   display: none;
 `;
 
+const ChooseIconWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  :first-child {
+    cursor: pointer;
+  }
+`;
+
+const ChooseIconBox = styled.div<{
+  isIconBoxActive?: boolean;
+  isImageBoxActive?: boolean;
+}>`
+  display: ${({ isIconBoxActive }) => (isIconBoxActive ? "block" : "none")};
+  position: absolute;
+  width: 13rem;
+  height: 10rem;
+  background-color: ${({ theme }) => theme.colors.background};
+  box-shadow: inset 0px 0px 10px 0px #a78453;
+  border-radius: 20px;
+  right: -15rem;
+  top: -2rem;
+`;
+
+const AddImageBox = styled(ChooseIconBox)`
+  display: ${({ isImageBoxActive }) => (isImageBoxActive ? "flex" : "none")};
+  align-items: center;
+  justify-content: center;
+  left: -15rem;
+  top: -2rem;
+  cursor: pointer;
+`;
+
 export default function CreateNewDiaryForm({
   handleRefresh,
 }: {
@@ -75,6 +112,8 @@ export default function CreateNewDiaryForm({
   const [description, setDescription] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isIconBoxActive, setIsIconBoxActive] = useState<boolean>(false);
+  const [isImageBoxActive, setIsImageBoxActive] = useState<boolean>(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -157,8 +196,11 @@ export default function CreateNewDiaryForm({
         onChange={(e) => handleDateChange(e)}
       />
       <ImageInputContainer>
-        <ImageInputLabel onClick={handleIconClick}>
-          <Image src={addImg} alt="Add image icon" height={75} width={75} />
+        <AddImageBox isImageBoxActive={isImageBoxActive}>
+          <Image src={plusSvg} alt="plus icon" height={65} width={65} />
+        </AddImageBox>
+        <ImageInputLabel onClick={() => setIsImageBoxActive((prev) => !prev)}>
+          <Image src={addImg} alt="Add image icon" height={65} width={65} />
         </ImageInputLabel>
         <ImageInput
           ref={fileInputRef}
@@ -167,6 +209,16 @@ export default function CreateNewDiaryForm({
           accept="image/*"
           onChange={handleImageChange}
         />
+        <ChooseIconWrapper>
+          <Image
+            onClick={() => setIsIconBoxActive((prev) => !prev)}
+            src={mountainSvg}
+            alt="mountain icon"
+            width={60}
+            height={60}
+          />
+          <ChooseIconBox isIconBoxActive={isIconBoxActive}></ChooseIconBox>
+        </ChooseIconWrapper>
       </ImageInputContainer>
       <PrimaryButton type="submit">Add diary</PrimaryButton>
     </StyledForm>

@@ -6,14 +6,14 @@ import { ShowMoreButtonContext } from "@/src/context/showMoreButtonContext";
 
 const Button = styled.button`
   display: flex;
-  align-items: center;
+  align-items: baseline;
   column-gap: 1rem;
   border: none;
   background: transparent;
   cursor: pointer;
   text-decoration: none;
-  font-size: ${({ theme }) => theme.fontSize.s};
-  font-weight: ${({ theme }) => theme.fontWeight.semiBold};
+  font-size: ${({ theme }) => theme.fontSize.xs};
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
 `;
 
 type setIsActive = (

@@ -6,7 +6,7 @@ import arrowRightLong from "@/public/arrowRightLong.svg";
 import Image from "next/image";
 
 const Wrapper = styled.div`
-  height: 8%;
+  height: 4rem;
   /* margin-bottom: 1rem; */
   display: flex;
   justify-content: center;

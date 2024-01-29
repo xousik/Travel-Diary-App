@@ -6,16 +6,17 @@ import backgroundImg from "@/public/backgroundImg.jpg";
 import Tilt from "react-parallax-tilt";
 import CreateNewDiaryForm from "../organisms/createNewDiaryForm";
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isLoged: boolean }>`
   display: flex;
   justify-content: space-between;
-  height: 92%;
+  height: ${({ isLoged }) => (isLoged ? "92%" : "100%")};
   width: 100%;
+  overflow-y: hidden;
 `;
 
-const StyledImage = styled(Image)`
+const StyledImage = styled(Image)<{ isLoged: boolean }>`
   width: 100%;
-  height: 100%;
+  height: ${({ isLoged }) => (isLoged ? "100%" : "90%")};
   border-radius: 1rem;
   box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.25);
 `;
@@ -41,6 +42,8 @@ const InnerWrapper = styled.div<{ isactive: number }>`
 
 const StyledTilt = styled(Tilt)`
   position: absolute;
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 100%;
   -webkit-backface-visibility: hidden; /* Safari */
@@ -82,14 +85,16 @@ const BackSide = styled.div`
 export default function BackgroundImgLayout({
   children,
   isactive,
+  isLoged,
   handleRefresh,
 }: {
   children: React.ReactNode;
   isactive?: boolean | undefined;
+  isLoged?: boolean;
   handleRefresh?: () => void;
 }) {
   return (
-    <Wrapper>
+    <Wrapper isLoged={isLoged!}>
       <Container>{children}</Container>
       <OuterWrapper>
         <InnerWrapper isactive={isactive ? 1 : 0}>
@@ -100,7 +105,11 @@ export default function BackgroundImgLayout({
             scale={0.95}
             transitionSpeed={2000}
           >
-            <StyledImage src={backgroundImg} alt="campervan on desert" />
+            <StyledImage
+              isLoged={isLoged!}
+              src={backgroundImg}
+              alt="campervan on desert"
+            />
           </StyledTilt>
           <BackSide>
             <CreateNewDiaryForm handleRefresh={handleRefresh!} />
