@@ -116,7 +116,7 @@ export default function CreateNewDiaryForm({
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isIconBoxActive, setIsIconBoxActive] = useState<boolean>(false);
   const [isImageBoxActive, setIsImageBoxActive] = useState<boolean>(false);
-  const [choosenIcon, setChoosenIcon] = useState<string | null>(null);
+  const [choosenIcon, setChoosenIcon] = useState<string | null>("mountain");
 
   console.log(selectedImage);
 

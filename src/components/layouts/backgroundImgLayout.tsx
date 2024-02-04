@@ -68,10 +68,8 @@ const BackSide = styled.div`
   transform: rotateY(180deg);
   background: linear-gradient(
     180deg,
-    rgba(151, 202, 232, 1) 0%,
-    rgba(169, 192, 209, 1) 13%,
-    rgba(232, 159, 131, 1) 25%,
-    rgba(236, 166, 120, 1) 50%,
+    rgb(98, 83, 72) 5%,
+    rgb(161, 120, 104) 40%,
     rgba(245, 181, 95, 1) 57%,
     rgba(250, 189, 83, 1) 69%,
     rgba(223, 214, 204, 1) 85%

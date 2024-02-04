@@ -11,7 +11,7 @@ import Image from "next/image";
 import arrowRight from "@/public/arrowRight.svg";
 
 const OuterWrapper = styled.div`
-  height: 100%;
+  max-height: 100%;
 `;
 
 const Wrapper = styled.div`
@@ -26,6 +26,7 @@ const StyledTravelCardsWrapper = styled(TravelCardsWrapper)`
   display: grid;
   grid-template-columns: 50% 50%;
   justify-items: center;
+  align-content: start;
   padding: 2rem 0;
 `;
 
@@ -43,6 +44,7 @@ type Diary = {
   title: string;
   description: string;
   date: string;
+  icon: string;
 };
 
 export default function LogedInShowMore({ userName }: { userName: string }) {
@@ -76,7 +78,12 @@ export default function LogedInShowMore({ userName }: { userName: string }) {
       {/* Div with Travel Cards */}
       <StyledTravelCardsWrapper>
         {diaries.map((diary: Diary) => (
-          <TravelCard key={diary.id} title={diary.title} date={diary.date} />
+          <TravelCard
+            key={diary.id}
+            title={diary.title}
+            date={diary.date}
+            icon={diary.icon}
+          />
         ))}
       </StyledTravelCardsWrapper>
     </OuterWrapper>
