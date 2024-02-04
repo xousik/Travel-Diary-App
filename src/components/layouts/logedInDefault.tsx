@@ -20,6 +20,7 @@ type Diary = {
   title: string;
   description: string;
   date: string;
+  icon: string;
 };
 
 export default function LogedInDefault({ userName }: { userName: string }) {
@@ -74,13 +75,18 @@ export default function LogedInDefault({ userName }: { userName: string }) {
             </ShowMoreButton>
           </InnerWrapper>
           <TravelCardsWrapper>
-            {diaries.map((diary: Diary) => (
-              <TravelCard
-                key={diary.id}
-                title={diary.title}
-                date={diary.date}
-              />
-            ))}
+            {!diaries.length ? (
+              <h3>Loading diaries ....</h3>
+            ) : (
+              diaries.map((diary: Diary) => (
+                <TravelCard
+                  key={diary.id}
+                  title={diary.title}
+                  date={diary.date}
+                  icon={diary.icon}
+                />
+              ))
+            )}
           </TravelCardsWrapper>
         </Wrapper>
       </BackgroundImgLayout>

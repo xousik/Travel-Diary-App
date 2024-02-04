@@ -1,7 +1,10 @@
 "use client";
 
 import styled from "styled-components";
-import mountainSVG from "../../../public/mountain.svg";
+import mountainSvg from "@/public/mountain.svg";
+import planeSvg from "@/public/plane.svg";
+import palmTreeSvg from "@/public/palmTree.svg";
+import yachtSvg from "@/public/yacht.svg";
 import Image from "next/image";
 
 const Wrapper = styled.div`
@@ -32,16 +35,32 @@ const InnerWrapper = styled.div`
 type TravelCardProps = {
   title?: string;
   date?: string;
+  icon?: string;
 };
 
-export default function TravelCard({ title, date }: TravelCardProps) {
+export default function TravelCard({ title, date, icon }: TravelCardProps) {
+  const handleIconSelect = (icon: string) => {
+    // setChoosenIcon(icon);
+    switch (icon) {
+      case "mountain":
+        return mountainSvg;
+      case "palmTree":
+        return palmTreeSvg;
+      case "plane":
+        return planeSvg;
+      case "yacht":
+        return yachtSvg;
+      default:
+        return mountainSvg;
+    }
+  };
   return (
     <Wrapper>
       <InnerWrapper>
         <h3>{title}</h3>
         <span>{date}</span>
       </InnerWrapper>
-      <Image src={mountainSVG} alt="mountain icon" width={60} />
+      <Image src={handleIconSelect(icon!)} alt="mountain icon" width={60} />
     </Wrapper>
   );
 }

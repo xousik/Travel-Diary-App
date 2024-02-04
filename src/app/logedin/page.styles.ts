@@ -17,8 +17,13 @@ export const TravelCardsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   row-gap: 1.2rem;
+
+  h3 {
+    font-size: ${({ theme }) => theme.fontSize.m};
+  }
 `;
 
 export const InnerWrapper = styled.div`

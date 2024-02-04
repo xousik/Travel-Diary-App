@@ -6,17 +6,17 @@ import backgroundImg from "@/public/backgroundImg.jpg";
 import Tilt from "react-parallax-tilt";
 import CreateNewDiaryForm from "../organisms/createNewDiaryForm";
 
-const Wrapper = styled.div<{ isLoged: boolean }>`
+const Wrapper = styled.div<{ isloged: number }>`
   display: flex;
   justify-content: space-between;
-  height: ${({ isLoged }) => (isLoged ? "92%" : "100%")};
+  height: ${({ isloged }) => (isloged ? "92%" : "100%")};
   width: 100%;
   overflow-y: hidden;
 `;
 
-const StyledImage = styled(Image)<{ isLoged: boolean }>`
+const StyledImage = styled(Image)<{ isloged: number }>`
   width: 100%;
-  height: ${({ isLoged }) => (isLoged ? "100%" : "90%")};
+  height: ${({ isloged }) => (isloged ? "100%" : "90%")};
   border-radius: 1rem;
   box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.25);
 `;
@@ -94,7 +94,7 @@ export default function BackgroundImgLayout({
   handleRefresh?: () => void;
 }) {
   return (
-    <Wrapper isLoged={isLoged!}>
+    <Wrapper isloged={isLoged! ? 1 : 0}>
       <Container>{children}</Container>
       <OuterWrapper>
         <InnerWrapper isactive={isactive ? 1 : 0}>
@@ -106,7 +106,7 @@ export default function BackgroundImgLayout({
             transitionSpeed={2000}
           >
             <StyledImage
-              isLoged={isLoged!}
+              isloged={isLoged! ? 1 : 0}
               src={backgroundImg}
               alt="campervan on desert"
             />

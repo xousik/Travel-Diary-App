@@ -6,7 +6,11 @@ import PrimaryButton from "../atoms/primaryButton";
 import addImg from "@/public/addImg.svg";
 import Image from "next/image";
 import mountainSvg from "@/public/mountain.svg";
+import palmTreeSvg from "@/public/palmTree.svg";
+import yachtSvg from "@/public/yacht.svg";
+import planeSvg from "@/public/plane.svg";
 import plusSvg from "@/public/plus.svg";
+import { ChooseIconBox } from "../molecules/chooseIconBox";
 
 const StyledForm = styled.form`
   width: 100%;
@@ -49,13 +53,20 @@ const StyledTextarea = styled.textarea`
   margin-top: 2rem;
 `;
 
+const InnerWrapper = styled.div`
+  display: flex;
+  column-gap: 6rem;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem 0 5rem 0;
+`;
+
 const ImageInputContainer = styled.div`
   position: relative;
   display: flex;
   column-gap: 6rem;
   align-items: center;
   justify-content: center;
-  margin: 1.5rem 0 4rem 0;
 `;
 
 const ImageInputLabel = styled.label`
@@ -74,30 +85,21 @@ const ChooseIconWrapper = styled.div`
   display: flex;
   align-items: center;
 
-  :first-child {
+  img {
     cursor: pointer;
   }
 `;
 
-const ChooseIconBox = styled.div<{
-  isIconBoxActive?: boolean;
-  isImageBoxActive?: boolean;
-}>`
-  display: ${({ isIconBoxActive }) => (isIconBoxActive ? "block" : "none")};
+const AddImageBox = styled.div<{ isimageboxactive?: number }>`
+  display: ${({ isimageboxactive }) => (isimageboxactive ? "flex" : "none")};
   position: absolute;
+  align-items: center;
+  justify-content: center;
   width: 13rem;
   height: 10rem;
   background-color: ${({ theme }) => theme.colors.background};
   box-shadow: inset 0px 0px 10px 0px #a78453;
   border-radius: 20px;
-  right: -15rem;
-  top: -2rem;
-`;
-
-const AddImageBox = styled(ChooseIconBox)`
-  display: ${({ isImageBoxActive }) => (isImageBoxActive ? "flex" : "none")};
-  align-items: center;
-  justify-content: center;
   left: -15rem;
   top: -2rem;
   cursor: pointer;
@@ -114,6 +116,9 @@ export default function CreateNewDiaryForm({
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isIconBoxActive, setIsIconBoxActive] = useState<boolean>(false);
   const [isImageBoxActive, setIsImageBoxActive] = useState<boolean>(false);
+  const [choosenIcon, setChoosenIcon] = useState<string | null>(null);
+
+  console.log(selectedImage);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -144,16 +149,26 @@ export default function CreateNewDiaryForm({
     }
   };
 
-  const handleIconClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
+  const handleIconSelect = (icon: string) => {
+    // setChoosenIcon(icon);
+    switch (icon) {
+      case "mountain":
+        return mountainSvg;
+      case "palmTree":
+        return palmTreeSvg;
+      case "plane":
+        return planeSvg;
+      case "yacht":
+        return yachtSvg;
+      default:
+        return mountainSvg;
     }
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const submitData = { title, description, date };
+    const submitData = { title, description, date, choosenIcon };
 
     try {
       await fetch("http://localhost:3000/api/diary", {
@@ -195,31 +210,40 @@ export default function CreateNewDiaryForm({
         value={date}
         onChange={(e) => handleDateChange(e)}
       />
-      <ImageInputContainer>
-        <AddImageBox isImageBoxActive={isImageBoxActive}>
-          <Image src={plusSvg} alt="plus icon" height={65} width={65} />
-        </AddImageBox>
-        <ImageInputLabel onClick={() => setIsImageBoxActive((prev) => !prev)}>
-          <Image src={addImg} alt="Add image icon" height={65} width={65} />
-        </ImageInputLabel>
-        <ImageInput
-          ref={fileInputRef}
-          name="image"
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-        />
+      <InnerWrapper>
+        <ImageInputContainer>
+          {/* AddImageBox should be drag and drop area and Image should has on click function that will triger image upload */}
+          <AddImageBox
+            onClick={() => fileInputRef.current?.click()}
+            isimageboxactive={isImageBoxActive ? 1 : 0}
+          >
+            <Image src={plusSvg} alt="plus icon" height={65} width={65} />
+          </AddImageBox>
+          <ImageInputLabel onClick={() => setIsImageBoxActive((prev) => !prev)}>
+            <Image src={addImg} alt="Add image icon" height={65} width={65} />
+          </ImageInputLabel>
+          <ImageInput
+            ref={fileInputRef}
+            name="image"
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+        </ImageInputContainer>
         <ChooseIconWrapper>
           <Image
             onClick={() => setIsIconBoxActive((prev) => !prev)}
-            src={mountainSvg}
+            src={handleIconSelect(choosenIcon!)}
             alt="mountain icon"
             width={60}
             height={60}
           />
-          <ChooseIconBox isIconBoxActive={isIconBoxActive}></ChooseIconBox>
+          <ChooseIconBox
+            isIconBoxActive={isIconBoxActive}
+            onIconSelect={setChoosenIcon}
+          />
         </ChooseIconWrapper>
-      </ImageInputContainer>
+      </InnerWrapper>
       <PrimaryButton type="submit">Add diary</PrimaryButton>
     </StyledForm>
   );

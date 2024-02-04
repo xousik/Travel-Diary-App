@@ -26,6 +26,7 @@ export async function POST(req: NextRequest) {
       title: data.title,
       description: data.description,
       date: data.date,
+      icon: data.choosenIcon,
     },
   });
   return NextResponse.json({
