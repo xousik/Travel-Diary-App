@@ -1,11 +1,14 @@
 "use client";
 
+import { useContext } from "react";
 import styled from "styled-components";
 import mountainSvg from "@/public/mountain.svg";
 import planeSvg from "@/public/plane.svg";
 import palmTreeSvg from "@/public/palmTree.svg";
 import yachtSvg from "@/public/yacht.svg";
 import Image from "next/image";
+import { DiaryDetailsModalContext } from "@/src/context/diaryDetailsModalContext";
+import { DiaryDetailsModalContextProps } from "../organisms/diaryDetailsModal/diaryDetailsModal";
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,9 +39,27 @@ type TravelCardProps = {
   title?: string;
   date?: string;
   icon?: string;
+  description?: string;
 };
 
-export default function TravelCard({ title, date, icon }: TravelCardProps) {
+export default function TravelCard({
+  title,
+  date,
+  icon,
+  description,
+}: TravelCardProps) {
+  const {
+    setActiveTravelCardInfo,
+    activeTravelCardInfo,
+    setIsModalOpen,
+    isModalOpen,
+  }: DiaryDetailsModalContextProps = useContext(DiaryDetailsModalContext);
+
+  const handleTravelCardClick = (title: string, description: string) => {
+    setActiveTravelCardInfo!({ title, description });
+    setIsModalOpen!((prev) => !prev);
+  };
+
   const handleIconSelect = (icon: string) => {
     // setChoosenIcon(icon);
     switch (icon) {
@@ -54,8 +75,9 @@ export default function TravelCard({ title, date, icon }: TravelCardProps) {
         return mountainSvg;
     }
   };
+
   return (
-    <Wrapper>
+    <Wrapper onClick={() => handleTravelCardClick!(title!, description!)}>
       <InnerWrapper>
         <h3>{title}</h3>
         <span>{date}</span>

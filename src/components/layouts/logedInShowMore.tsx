@@ -5,7 +5,8 @@ import { TravelCardsWrapper } from "../../app/logedin/page.styles";
 import ShowMoreButton from "../atoms/showMoreButton";
 import Image from "next/image";
 import arrowRight from "@/public/arrowRight.svg";
-import { TravelCards } from "./logedInDefault";
+import TravelCards from "../organisms/travelCards/travelCards";
+import DiaryDetailsModal from "../organisms/diaryDetailsModal/diaryDetailsModal";
 
 const OuterWrapper = styled.div`
   max-height: 100%;
@@ -18,7 +19,6 @@ const Wrapper = styled.div`
 `;
 
 const StyledTravelCardsWrapper = styled(TravelCardsWrapper)`
-  /* overflow-y: scroll; */
   height: 100%;
   display: grid;
   grid-template-columns: 50% 50%;
@@ -38,6 +38,7 @@ const StyledImage = styled(Image)`
 export default function LogedInShowMore({ userName }: { userName: string }) {
   return (
     <OuterWrapper>
+      <DiaryDetailsModal />
       <LogedHeader userName={userName!} />
       {/* Year navigation */}
       <YearNavigation />

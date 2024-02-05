@@ -6,6 +6,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { theme } from "./css/theme";
 import { EB_Garamond } from "next/font/google";
 import { ShowMoreButtonContextProvider } from "../context/showMoreButtonContext";
+import { DiaryDetailsModalContextProvider } from "../context/diaryDetailsModalContext";
 
 const garamond = EB_Garamond({ subsets: ["latin"] });
 
@@ -21,9 +22,11 @@ export default function AppProviders({
   return (
     <ThemeProvider theme={theme}>
       <ShowMoreButtonContextProvider>
-        <StyledBody className={garamond.className}>
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        </StyledBody>
+        <DiaryDetailsModalContextProvider>
+          <StyledBody className={garamond.className}>
+            <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          </StyledBody>
+        </DiaryDetailsModalContextProvider>
       </ShowMoreButtonContextProvider>
     </ThemeProvider>
   );

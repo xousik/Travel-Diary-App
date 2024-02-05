@@ -1,12 +1,8 @@
-"use client";
-
 import styled from "styled-components";
 import Image from "next/image";
-import backgroundImg from "@/public/backgroundImg.jpg";
 import Tilt from "react-parallax-tilt";
-import CreateNewDiaryForm from "../organisms/createNewDiaryForm/createNewDiaryForm";
 
-const Wrapper = styled.div<{ isloged: number }>`
+export const Wrapper = styled.div<{ isloged: number }>`
   display: flex;
   justify-content: space-between;
   height: ${({ isloged }) => (isloged ? "92%" : "100%")};
@@ -14,14 +10,14 @@ const Wrapper = styled.div<{ isloged: number }>`
   overflow-y: hidden;
 `;
 
-const StyledImage = styled(Image)<{ isloged: number }>`
+export const StyledImage = styled(Image)<{ isloged: number }>`
   width: 100%;
   height: ${({ isloged }) => (isloged ? "100%" : "90%")};
   border-radius: 1rem;
   box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.25);
 `;
 
-const OuterWrapper = styled.div`
+export const OuterWrapper = styled.div`
   background-color: transparent;
   width: calc(40% - 1rem);
   height: calc(90% - 2rem);
@@ -29,7 +25,7 @@ const OuterWrapper = styled.div`
   perspective: 1000px;
 `;
 
-const InnerWrapper = styled.div<{ isactive: number }>`
+export const InnerWrapper = styled.div<{ isactive: number }>`
   position: relative;
   width: 100%;
   height: 100%;
@@ -40,7 +36,7 @@ const InnerWrapper = styled.div<{ isactive: number }>`
   transform: ${({ isactive }) => isactive && "rotateY(180deg)"};
 `;
 
-const StyledTilt = styled(Tilt)`
+export const StyledTilt = styled(Tilt)`
   position: absolute;
   display: flex;
   align-items: center;
@@ -54,12 +50,12 @@ const StyledTilt = styled(Tilt)`
   }
 `;
 
-const Container = styled.div`
+export const Container = styled.div`
   width: 50vw;
   height: 100%;
 `;
 
-const BackSide = styled.div`
+export const BackSide = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -79,41 +75,3 @@ const BackSide = styled.div`
   /* -webkit-filter: blur(2px); */
   z-index: -9;
 `;
-
-export default function BackgroundImgLayout({
-  children,
-  isactive,
-  isLoged,
-  handleRefresh,
-}: {
-  children: React.ReactNode;
-  isactive?: boolean | undefined;
-  isLoged?: boolean;
-  handleRefresh?: () => void;
-}) {
-  return (
-    <Wrapper isloged={isLoged! ? 1 : 0}>
-      <Container>{children}</Container>
-      <OuterWrapper>
-        <InnerWrapper isactive={isactive ? 1 : 0}>
-          <StyledTilt
-            tiltReverse={true}
-            tiltMaxAngleX={5}
-            tiltMaxAngleY={5}
-            scale={0.95}
-            transitionSpeed={2000}
-          >
-            <StyledImage
-              isloged={isLoged! ? 1 : 0}
-              src={backgroundImg}
-              alt="campervan on desert"
-            />
-          </StyledTilt>
-          <BackSide>
-            <CreateNewDiaryForm handleRefresh={handleRefresh!} />
-          </BackSide>
-        </InnerWrapper>
-      </OuterWrapper>
-    </Wrapper>
-  );
-}

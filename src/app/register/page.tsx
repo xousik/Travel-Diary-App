@@ -1,5 +1,5 @@
 import { LoginPageWrapper } from "@/src/components/atoms/loginPage/loginPageWrapper";
-import BackgroundImgLayout from "@/src/components/layouts/backgroundImgLayout";
+import BackgroundImgLayout from "@/src/components/layouts/backgroundImgLayout/backgroundImgLayout";
 import MainTitle from "@/src/components/atoms/mainTitle";
 import RegisterForm from "@/src/components/organisms/registerForm";
 

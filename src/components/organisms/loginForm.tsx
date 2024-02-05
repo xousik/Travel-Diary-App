@@ -20,15 +20,6 @@ const RegisterLink = styled(Link)`
   text-decoration: none;
 `;
 
-//  TODO:  Consider if I want to log in with credentialls or email, if emaill i don't need that bellow
-
-// const ForgotPasswordLink = styled(Link)`
-//   color: ${({ theme }) => theme.colors.darkGrey};
-//   font-size: ${({ theme }) => theme.fontSize.s};
-//   font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-//   text-decoration: none;
-// `;
-
 export default function LoginForm() {
   const [email, setEmail] = useState<string>("");
 
