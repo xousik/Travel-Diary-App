@@ -1,14 +1,11 @@
-"use cllient";
-
-import { useState, useEffect } from "react";
 import styled from "styled-components";
 import LogedHeader from "@/src/components/molecules/logedHeader";
 import YearNavigation from "@/src/components/molecules/yearNavigation";
 import { TravelCardsWrapper } from "../../app/logedin/page.styles";
-import TravelCard from "@/src/components/molecules/travelCard";
 import ShowMoreButton from "../atoms/showMoreButton";
 import Image from "next/image";
 import arrowRight from "@/public/arrowRight.svg";
+import { TravelCards } from "./logedInDefault";
 
 const OuterWrapper = styled.div`
   max-height: 100%;
@@ -38,32 +35,7 @@ const StyledImage = styled(Image)`
   transform: rotate(0.5turn);
 `;
 
-type Diary = {
-  id: string;
-  userId: string;
-  title: string;
-  description: string;
-  date: string;
-  icon: string;
-};
-
 export default function LogedInShowMore({ userName }: { userName: string }) {
-  const [diaries, setDiaries] = useState<Diary[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Is that path ok ? Or should change it to work properly on production
-        const response = await fetch("http://localhost:3000/api/diary");
-        const data = await response.json();
-        setDiaries(data);
-      } catch (error) {
-        console.error("Error fetching user diaries:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
   return (
     <OuterWrapper>
       <LogedHeader userName={userName!} />
@@ -77,14 +49,7 @@ export default function LogedInShowMore({ userName }: { userName: string }) {
       </Wrapper>
       {/* Div with Travel Cards */}
       <StyledTravelCardsWrapper>
-        {diaries.map((diary: Diary) => (
-          <TravelCard
-            key={diary.id}
-            title={diary.title}
-            date={diary.date}
-            icon={diary.icon}
-          />
-        ))}
+        <TravelCards areLimited={false} />
       </StyledTravelCardsWrapper>
     </OuterWrapper>
   );

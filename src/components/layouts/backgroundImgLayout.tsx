@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import backgroundImg from "@/public/backgroundImg.jpg";
 import Tilt from "react-parallax-tilt";
-import CreateNewDiaryForm from "../organisms/createNewDiaryForm";
+import CreateNewDiaryForm from "../organisms/createNewDiaryForm/createNewDiaryForm";
 
 const Wrapper = styled.div<{ isloged: number }>`
   display: flex;
