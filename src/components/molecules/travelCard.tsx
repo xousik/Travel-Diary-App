@@ -50,9 +50,7 @@ export default function TravelCard({
 }: TravelCardProps) {
   const {
     setActiveTravelCardInfo,
-    activeTravelCardInfo,
     setIsModalOpen,
-    isModalOpen,
   }: DiaryDetailsModalContextProps = useContext(DiaryDetailsModalContext);
 
   const handleTravelCardClick = (title: string, description: string) => {

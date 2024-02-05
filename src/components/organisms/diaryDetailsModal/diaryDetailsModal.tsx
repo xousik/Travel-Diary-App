@@ -59,7 +59,6 @@ export type DiaryDetailsModalContextProps = {
 
 export default function DiaryDetailsModal() {
   const {
-    setActiveTravelCardInfo,
     activeTravelCardInfo,
     setIsModalOpen,
     isModalOpen,

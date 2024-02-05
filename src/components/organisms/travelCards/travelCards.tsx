@@ -13,17 +13,11 @@ export type Diary = {
 export default function TravelCards({
   refresh,
   areLimited,
-  onClick,
 }: {
   refresh?: boolean;
   areLimited: boolean;
-  onClick?: (title: string, description: string) => void;
 }) {
   const [diaries, setDiaries] = useState<Diary[]>([]);
-  const [activeTravelCardInfo, setActiveTravelCardInfo] = useState({
-    title: "",
-    description: "",
-  });
 
   useEffect(() => {
     const fetchData = async () => {

@@ -1,4 +1,4 @@
-import { useState, useContext, Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import BackgroundImgLayout from "./backgroundImgLayout/backgroundImgLayout";
 import PrimaryButton from "@/src/components/atoms/primaryButton";
 import ShowMoreButton from "@/src/components/atoms/showMoreButton";
@@ -12,7 +12,6 @@ import {
 } from "@/src/app/logedin/page.styles";
 import TravelCards from "../organisms/travelCards/travelCards";
 import DiaryDetailsModal from "../organisms/diaryDetailsModal/diaryDetailsModal";
-import { DiaryDetailsModalContext } from "@/src/context/diaryDetailsModalContext";
 
 export default function LogedInDefault({ userName }: { userName: string }) {
   const [isActive, setIsActive] = useState<boolean>(false);
