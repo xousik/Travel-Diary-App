@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { prisma } from "@/src/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import cloudinary from "@/src/lib/cloudinary";
 
 const getCurrentUser = async () => {
   const session = await getServerSession(authOptions);
@@ -29,6 +30,16 @@ export async function POST(req: NextRequest) {
       icon: data.choosenIcon,
     },
   });
+
+  try {
+    // Upload the image
+    const result = await cloudinary.uploader.upload(data.selectedImage);
+    console.log(result);
+    // return result.public_id;
+  } catch (error) {
+    console.error(error);
+  }
+
   return NextResponse.json({
     msg: `Successfuly created new Diary: ${data.title}`,
     status: 200,

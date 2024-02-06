@@ -18,20 +18,23 @@ export default function TravelCards({
   areLimited: boolean;
 }) {
   const [diaries, setDiaries] = useState<Diary[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Is that path ok ? Or should change it to work properly on production
-        const response = await fetch("http://localhost:3000/api/diary");
-        const data = await response.json();
-
-        // Set max amount of travel cards to 3
-        if (areLimited) {
-          setDiaries(data.slice(-3).reverse());
-        } else {
-          setDiaries(data);
-        }
+        await fetch("http://localhost:3000/api/diary")
+          .then((response) => response.json())
+          .then((data) => {
+            // Set max amount of travel cards to 3
+            if (areLimited) {
+              setDiaries(data.slice(-3).reverse());
+            } else {
+              setDiaries(data);
+            }
+            setIsLoading(false);
+          });
       } catch (error) {
         console.error("Error fetching user diaries:", error);
       }
@@ -42,7 +45,7 @@ export default function TravelCards({
 
   return (
     <>
-      {!diaries.length ? (
+      {isLoading ? (
         <h3>Loading diaries ....</h3>
       ) : (
         diaries.map((diary: Diary) => (

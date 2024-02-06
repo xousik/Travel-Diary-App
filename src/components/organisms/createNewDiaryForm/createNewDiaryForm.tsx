@@ -35,8 +35,6 @@ export default function CreateNewDiaryForm({
   const [isImageBoxActive, setIsImageBoxActive] = useState<boolean>(false);
   const [choosenIcon, setChoosenIcon] = useState<string | null>("mountain");
 
-  console.log(selectedImage);
-
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,12 +55,17 @@ export default function CreateNewDiaryForm({
     const file = event.target.files?.[0];
 
     if (file) {
-      // You can use FileReader to read the image and convert it to a data URL
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setSelectedImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+      const fileType: string = file.type;
+      if (fileType.startsWith("image/")) {
+        // You can use FileReader to read the image and convert it to a data URL
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setSelectedImage(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert("File is not an image");
+      }
     }
   };
 
@@ -85,7 +88,7 @@ export default function CreateNewDiaryForm({
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const submitData = { title, description, date, choosenIcon };
+    const submitData = { title, description, date, choosenIcon, selectedImage };
 
     try {
       await fetch("http://localhost:3000/api/diary", {
@@ -98,6 +101,9 @@ export default function CreateNewDiaryForm({
 
       setTitle("");
       setDescription("");
+      setDate("");
+      setIsImageBoxActive(false);
+      setIsIconBoxActive(false);
       handleRefresh();
 
       // TODO: Add some cool pop out box info " Correctly added new Diary! "

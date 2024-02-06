@@ -1,49 +1,8 @@
 import { DiaryDetailsModalContext } from "@/src/context/diaryDetailsModalContext";
-import React, { Dispatch, SetStateAction, useContext } from "react";
-import styled from "styled-components";
-
-const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-`;
-
-const Modal = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  background: ${({ theme }) => theme.colors.background};
-  width: 85%;
-  height: 90%;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  color: ${({ theme }) => theme.colors.brown};
-
-  h3 {
-    font-size: ${({ theme }) => theme.fontSize.xxl};
-  }
-
-  p {
-    font-size: ${({ theme }) => theme.fontSize.l};
-    font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-  }
-
-  div {
-    border: 1px solid black;
-    height: 60%;
-    width: 90%;
-    font-size: 20px;
-    text-align: center;
-  }
-`;
+import React, { Dispatch, SetStateAction, useContext, useEffect } from "react";
+import closeSvg from "@/public/close.svg";
+import Image from "next/image";
+import { ModalOverlay, Modal, StyledButton } from "./diaryDetailsModal.styles";
 
 export type DiaryDetailsModalContextProps = {
   setActiveTravelCardInfo?: Dispatch<
@@ -64,11 +23,33 @@ export default function DiaryDetailsModal() {
     isModalOpen,
   }: DiaryDetailsModalContextProps = useContext(DiaryDetailsModalContext);
 
+  useEffect(() => {
+    const keyDownHandler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+
+        setIsModalOpen!((prev) => !prev);
+      }
+    };
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+
+    // Line below removes warning about missing dependency: 'setIsModalOpen'
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (!isModalOpen) return null;
 
   return (
     <ModalOverlay onClick={() => setIsModalOpen!((prev: boolean) => !prev)}>
-      <Modal>
+      <Modal onClick={(e) => e.stopPropagation()}>
+        <StyledButton onClick={() => setIsModalOpen!((prev) => !prev)}>
+          <Image src={closeSvg} alt="close icon" width={45} height={45} />
+        </StyledButton>
         <h3>{activeTravelCardInfo!.title}</h3>
         <p>{activeTravelCardInfo!.description}</p>
         <div>carousele with images</div>
