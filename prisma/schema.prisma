@@ -44,6 +44,7 @@ model Diary {
   description String
   date String 
   icon String
+  imagesId String[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 

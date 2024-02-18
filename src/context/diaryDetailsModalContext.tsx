@@ -13,6 +13,7 @@ export const DiaryDetailsModalContextProvider = ({
   const [activeTravelCardInfo, setActiveTravelCardInfo] = useState({
     title: "",
     description: "",
+    images: [],
   });
 
   return (

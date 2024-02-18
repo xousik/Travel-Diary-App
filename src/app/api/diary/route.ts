@@ -18,24 +18,27 @@ const getCurrentUser = async () => {
 
 export async function POST(req: NextRequest) {
   const data = await req.json();
+  const imagesId = [];
 
   const currentUser = await getCurrentUser();
 
-  await prisma.diary.create({
-    data: {
-      userId: currentUser!.id,
-      title: data.title,
-      description: data.description,
-      date: data.date,
-      icon: data.choosenIcon,
-    },
-  });
-
   try {
     // Upload the image
-    const result = await cloudinary.uploader.upload(data.selectedImage);
-    console.log(result);
+    for (let i = 0; i < data.selectedImages.length; i++) {
+      const result = await cloudinary.uploader.upload(data.selectedImages[i]);
+      imagesId.push(result.public_id);
+    }
     // return result.public_id;
+    await prisma.diary.create({
+      data: {
+        userId: currentUser!.id,
+        title: data.title,
+        description: data.description,
+        date: data.date,
+        icon: data.choosenIcon,
+        imagesId,
+      },
+    });
   } catch (error) {
     console.error(error);
   }

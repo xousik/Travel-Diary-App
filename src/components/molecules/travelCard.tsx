@@ -40,6 +40,7 @@ type TravelCardProps = {
   date?: string;
   icon?: string;
   description?: string;
+  images?: string[];
 };
 
 export default function TravelCard({
@@ -47,14 +48,19 @@ export default function TravelCard({
   date,
   icon,
   description,
+  images,
 }: TravelCardProps) {
   const {
     setActiveTravelCardInfo,
     setIsModalOpen,
   }: DiaryDetailsModalContextProps = useContext(DiaryDetailsModalContext);
 
-  const handleTravelCardClick = (title: string, description: string) => {
-    setActiveTravelCardInfo!({ title, description });
+  const handleTravelCardClick = (
+    title: string,
+    description: string,
+    images: string[]
+  ) => {
+    setActiveTravelCardInfo!({ title, description, images });
     setIsModalOpen!((prev) => !prev);
   };
 
@@ -75,7 +81,9 @@ export default function TravelCard({
   };
 
   return (
-    <Wrapper onClick={() => handleTravelCardClick!(title!, description!)}>
+    <Wrapper
+      onClick={() => handleTravelCardClick!(title!, description!, images!)}
+    >
       <InnerWrapper>
         <h3>{title}</h3>
         <span>{date}</span>

@@ -34,6 +34,7 @@ CREATE TABLE "Diary" (
     "description" TEXT NOT NULL,
     "date" TEXT NOT NULL,
     "icon" TEXT NOT NULL,
+    "imagesId" TEXT[],
 
     CONSTRAINT "Diary_pkey" PRIMARY KEY ("id")
 );

@@ -39,9 +39,8 @@ export const Modal = styled.div`
   }
 
   div {
-    border: 1px solid black;
     height: 60%;
-    width: 90%;
+    width: max-content;
     font-size: 20px;
     text-align: center;
   }

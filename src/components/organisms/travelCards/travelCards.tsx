@@ -8,6 +8,7 @@ export type Diary = {
   description: string;
   date: string;
   icon: string;
+  imagesId: string[];
 };
 
 export default function TravelCards({
@@ -55,6 +56,7 @@ export default function TravelCards({
             date={diary.date}
             icon={diary.icon}
             description={diary.description}
+            images={diary.imagesId}
           />
         ))
       )}

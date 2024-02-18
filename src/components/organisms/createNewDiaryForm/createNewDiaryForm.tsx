@@ -30,10 +30,10 @@ export default function CreateNewDiaryForm({
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [date, setDate] = useState<string>("");
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [isIconBoxActive, setIsIconBoxActive] = useState<boolean>(false);
   const [isImageBoxActive, setIsImageBoxActive] = useState<boolean>(false);
-  const [choosenIcon, setChoosenIcon] = useState<string | null>("mountain");
+  const [choosenIcon, setChoosenIcon] = useState<string>("mountain");
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -60,7 +60,8 @@ export default function CreateNewDiaryForm({
         // You can use FileReader to read the image and convert it to a data URL
         const reader = new FileReader();
         reader.onloadend = () => {
-          setSelectedImage(reader.result as string);
+          setSelectedImages([...selectedImages, reader.result as string]);
+          console.log("Image added");
         };
         reader.readAsDataURL(file);
       } else {
@@ -88,7 +89,13 @@ export default function CreateNewDiaryForm({
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const submitData = { title, description, date, choosenIcon, selectedImage };
+    const submitData = {
+      title,
+      description,
+      date,
+      choosenIcon,
+      selectedImages,
+    };
 
     try {
       await fetch("http://localhost:3000/api/diary", {
@@ -104,6 +111,7 @@ export default function CreateNewDiaryForm({
       setDate("");
       setIsImageBoxActive(false);
       setIsIconBoxActive(false);
+      setSelectedImages([]);
       handleRefresh();
 
       // TODO: Add some cool pop out box info " Correctly added new Diary! "
@@ -112,6 +120,8 @@ export default function CreateNewDiaryForm({
       console.log(error);
     }
   };
+
+  console.log(selectedImages);
 
   return (
     <StyledForm onSubmit={(e) => handleSubmit(e)}>
