@@ -48,7 +48,11 @@ export default function LogedInDefault({ userName }: { userName: string }) {
             </ShowMoreButton>
           </InnerWrapper>
           <TravelCardsWrapper>
-            <TravelCards refresh={refresh} areLimited={true} />
+            <TravelCards
+              refresh={refresh}
+              setRefresh={setRefresh}
+              areLimited={true}
+            />
           </TravelCardsWrapper>
         </Wrapper>
       </BackgroundImgLayout>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import LogedHeader from "@/src/components/molecules/logedHeader";
 import YearNavigation from "@/src/components/molecules/yearNavigation";
@@ -36,6 +37,7 @@ const StyledImage = styled(Image)`
 `;
 
 export default function LogedInShowMore({ userName }: { userName: string }) {
+  const [refresh, setRefresh] = useState<boolean>(false);
   return (
     <OuterWrapper>
       <DiaryDetailsModal />
@@ -50,7 +52,11 @@ export default function LogedInShowMore({ userName }: { userName: string }) {
       </Wrapper>
       {/* Div with Travel Cards */}
       <StyledTravelCardsWrapper>
-        <TravelCards areLimited={false} />
+        <TravelCards
+          areLimited={false}
+          setRefresh={setRefresh}
+          refresh={refresh}
+        />
       </StyledTravelCardsWrapper>
     </OuterWrapper>
   );

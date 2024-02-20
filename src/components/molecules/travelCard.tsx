@@ -9,11 +9,13 @@ import yachtSvg from "@/public/yacht.svg";
 import Image from "next/image";
 import { DiaryDetailsModalContext } from "@/src/context/diaryDetailsModalContext";
 import { DiaryDetailsModalContextProps } from "../organisms/diaryDetailsModal/diaryDetailsModal";
+import deleteSvg from "@/public/delete.svg";
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   width: 28rem;
   height: 8rem;
   border-radius: 1rem;
@@ -22,7 +24,16 @@ const Wrapper = styled.div`
   cursor: pointer;
 `;
 
+const StyledImage = styled(Image)`
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+`;
+
 const InnerWrapper = styled.div`
+  width: 10rem;
+  margin-right: 5rem;
+  margin-left: -6rem;
   text-align: center;
   color: ${({ theme }) => theme.colors.brown};
   font-weight: ${({ theme }) => theme.fontWeight.semiBold};
@@ -36,19 +47,26 @@ const InnerWrapper = styled.div`
 `;
 
 type TravelCardProps = {
+  id: string;
   title?: string;
   date?: string;
   icon?: string;
   description?: string;
   images?: string[];
+  handleDelete: (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+    id: string
+  ) => void;
 };
 
 export default function TravelCard({
+  id,
   title,
   date,
   icon,
   description,
   images,
+  handleDelete,
 }: TravelCardProps) {
   const {
     setActiveTravelCardInfo,
@@ -89,6 +107,13 @@ export default function TravelCard({
         <span>{date}</span>
       </InnerWrapper>
       <Image src={handleIconSelect(icon!)} alt="mountain icon" width={60} />
+      <StyledImage
+        src={deleteSvg}
+        alt="delete icon"
+        width={25}
+        height={25}
+        onClick={(e) => handleDelete(e, id)}
+      />
     </Wrapper>
   );
 }
