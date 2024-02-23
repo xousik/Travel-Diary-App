@@ -68,7 +68,7 @@ export default function DiaryDetailsModal() {
     setImages([]);
 
     const keyDownHandler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+      if (e.key === "Escape" && isModalOpen) {
         e.preventDefault();
 
         setIsModalOpen!((prev) => !prev);

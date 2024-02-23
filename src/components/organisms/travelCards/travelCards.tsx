@@ -16,8 +16,8 @@ export default function TravelCards({
   setRefresh,
   areLimited,
 }: {
-  refresh?: boolean;
-  setRefresh?: React.Dispatch<SetStateAction<boolean>>;
+  refresh: boolean;
+  setRefresh: React.Dispatch<SetStateAction<boolean>>;
   areLimited: boolean;
 }) {
   const [diaries, setDiaries] = useState<Diary[]>([]);
