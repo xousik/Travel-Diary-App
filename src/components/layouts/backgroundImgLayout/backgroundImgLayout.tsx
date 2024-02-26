@@ -11,23 +11,29 @@ import {
   StyledImage,
   BackSide,
 } from "./backgroundImgLayout.styles";
+import { useContext } from "react";
+import { BackgroundImageStateContext } from "@/src/context/backgroundImageStateContext";
 
 export default function BackgroundImgLayout({
   children,
-  isactive,
   isLoged,
   handleRefresh,
 }: {
   children: React.ReactNode;
-  isactive?: boolean | undefined;
   isLoged?: boolean;
   handleRefresh?: () => void;
 }) {
+  const {
+    isActive,
+  }: {
+    isActive?: boolean;
+  } = useContext(BackgroundImageStateContext);
+
   return (
     <Wrapper isloged={isLoged! ? 1 : 0}>
       <Container>{children}</Container>
       <OuterWrapper>
-        <InnerWrapper isactive={isactive ? 1 : 0}>
+        <InnerWrapper isactive={isActive ? 1 : 0}>
           <StyledTilt
             tiltReverse={true}
             tiltMaxAngleX={5}

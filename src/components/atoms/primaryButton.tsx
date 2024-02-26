@@ -1,6 +1,8 @@
 "use client";
 
+import { SetStateAction, useContext } from "react";
 import styled from "styled-components";
+import { BackgroundImageStateContext } from "@/src/context/backgroundImageStateContext";
 
 const Button = styled.button<{
   width?: number;
@@ -32,7 +34,6 @@ type ButtonProps = {
   width?: number;
   height?: number;
   fontSize?: number;
-  onClick?: any;
 };
 
 export default function PrimaryButton({
@@ -41,11 +42,16 @@ export default function PrimaryButton({
   width,
   height,
   fontSize,
-  onClick,
 }: ButtonProps) {
+  const {
+    setIsActive,
+  }: {
+    setIsActive?: React.Dispatch<SetStateAction<boolean>>;
+  } = useContext(BackgroundImageStateContext);
+
   return (
     <Button
-      onClick={onClick && (() => onClick((prev: boolean) => !prev))}
+      onClick={() => setIsActive!((prev: boolean) => !prev)}
       type={type}
       width={width}
       height={height}

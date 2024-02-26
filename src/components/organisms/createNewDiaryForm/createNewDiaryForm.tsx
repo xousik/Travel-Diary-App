@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState, useRef } from "react";
+import { FormEvent, useState, useRef, useContext } from "react";
 import PrimaryButton from "../../atoms/primaryButton";
 import addImg from "@/public/addImg.svg";
 import Image from "next/image";
@@ -21,6 +21,8 @@ import {
   ChooseIconWrapper,
   AddImageBox,
 } from "./createNewDiaryForm.styles";
+import { SetStateAction } from "react";
+import { BackgroundImageStateContext } from "@/src/context/backgroundImageStateContext";
 
 export default function CreateNewDiaryForm({
   handleRefresh,
@@ -34,6 +36,12 @@ export default function CreateNewDiaryForm({
   const [isIconBoxActive, setIsIconBoxActive] = useState<boolean>(false);
   const [isImageBoxActive, setIsImageBoxActive] = useState<boolean>(false);
   const [choosenIcon, setChoosenIcon] = useState<string>("mountain");
+
+  const {
+    setIsActive,
+  }: {
+    setIsActive?: React.Dispatch<SetStateAction<boolean>>;
+  } = useContext(BackgroundImageStateContext);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -61,7 +69,7 @@ export default function CreateNewDiaryForm({
         const reader = new FileReader();
         reader.onloadend = () => {
           setSelectedImages([...selectedImages, reader.result as string]);
-          console.log("Image added");
+          setIsImageBoxActive(false);
         };
         reader.readAsDataURL(file);
       } else {
@@ -71,7 +79,6 @@ export default function CreateNewDiaryForm({
   };
 
   const handleIconSelect = (icon: string) => {
-    // setChoosenIcon(icon);
     switch (icon) {
       case "mountain":
         return mountainSvg;
@@ -106,11 +113,13 @@ export default function CreateNewDiaryForm({
         },
       });
 
+      setIsActive!(false);
       setTitle("");
       setDescription("");
       setDate("");
       setIsImageBoxActive(false);
       setIsIconBoxActive(false);
+      setChoosenIcon("mountain");
       setSelectedImages([]);
       handleRefresh();
 
@@ -174,6 +183,7 @@ export default function CreateNewDiaryForm({
           <ChooseIconBox
             isIconBoxActive={isIconBoxActive}
             onIconSelect={setChoosenIcon}
+            setIsIconBoxActive={setIsIconBoxActive}
           />
         </ChooseIconWrapper>
       </InnerWrapper>

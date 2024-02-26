@@ -14,7 +14,6 @@ import TravelCards from "../organisms/travelCards/travelCards";
 import DiaryDetailsModal from "../organisms/diaryDetailsModal/diaryDetailsModal";
 
 export default function LogedInDefault({ userName }: { userName: string }) {
-  const [isActive, setIsActive] = useState<boolean>(false);
   const [refresh, setRefresh] = useState<boolean>(false);
 
   const handleRefresh = () => {
@@ -26,18 +25,9 @@ export default function LogedInDefault({ userName }: { userName: string }) {
     <>
       <DiaryDetailsModal />
       <LogedHeader userName={userName!} />
-      <BackgroundImgLayout
-        isLoged={true}
-        isactive={isActive}
-        handleRefresh={handleRefresh}
-      >
+      <BackgroundImgLayout isLoged={true} handleRefresh={handleRefresh}>
         <Wrapper>
-          <PrimaryButton
-            onClick={setIsActive}
-            width={15}
-            height={4.4}
-            fontSize={30}
-          >
+          <PrimaryButton width={15} height={4.4} fontSize={30}>
             Create new diary
           </PrimaryButton>
           <InnerWrapper>

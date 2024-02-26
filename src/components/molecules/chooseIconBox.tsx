@@ -6,6 +6,7 @@ import mountainSvg from "@/public/mountain.svg";
 import palmTreeSvg from "@/public/palmTree.svg";
 import yachtSvg from "@/public/yacht.svg";
 import planeSvg from "@/public/plane.svg";
+import { SetStateAction } from "react";
 
 const Wrapper = styled.div<{
   isiconboxactive?: number;
@@ -27,6 +28,7 @@ const Wrapper = styled.div<{
 type ChooseIconBoxProps = {
   isIconBoxActive: boolean;
   onIconSelect: (icon: string) => void;
+  setIsIconBoxActive: React.Dispatch<SetStateAction<boolean>>;
 };
 
 // Left it like this or change to export default
@@ -34,9 +36,11 @@ type ChooseIconBoxProps = {
 export const ChooseIconBox = ({
   isIconBoxActive,
   onIconSelect,
+  setIsIconBoxActive,
 }: ChooseIconBoxProps) => {
   const handleIconSelect = (icon: string) => {
     onIconSelect(icon);
+    setIsIconBoxActive(false);
   };
 
   return (
