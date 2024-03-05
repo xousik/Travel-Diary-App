@@ -15,10 +15,12 @@ export default function TravelCards({
   refresh,
   setRefresh,
   areLimited,
+  howMany,
 }: {
   refresh: boolean;
   setRefresh: React.Dispatch<SetStateAction<boolean>>;
   areLimited: boolean;
+  howMany?: ((data: number) => void) | undefined;
 }) {
   const [diaries, setDiaries] = useState<Diary[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -31,13 +33,16 @@ export default function TravelCards({
         // Is that path ok ? Or should change it to work properly on production
         await fetch(apiLink)
           .then((response) => response.json())
-          .then((data) => {
+          .then((data: Diary[]) => {
             // Set max amount of travel cards to 3
-            if (areLimited) {
-              setDiaries(data.slice(-3).reverse());
+            if (areLimited && data.length > 3) {
+              setDiaries(data.slice(data.length - 3, data.length).reverse());
+            } else if (areLimited && data.length < 4) {
+              setDiaries(data.slice(0, data.length).reverse());
             } else {
               setDiaries(data);
             }
+            howMany && howMany!(data.length);
             setIsLoading(false);
           });
       } catch (error) {
@@ -46,7 +51,7 @@ export default function TravelCards({
     };
 
     fetchData();
-  }, [refresh, areLimited]);
+  }, [refresh, areLimited, howMany]);
 
   const handleDelete = async (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,

@@ -15,10 +15,15 @@ import DiaryDetailsModal from "../organisms/diaryDetailsModal/diaryDetailsModal"
 
 export default function LogedInDefault({ userName }: { userName: string }) {
   const [refresh, setRefresh] = useState<boolean>(false);
+  const [howManyDiaries, setHowManyDiaries] = useState<number>();
 
   const handleRefresh = () => {
     // Toggle the state to trigger a re-render of the child component
     setRefresh((prevRefresh) => !prevRefresh);
+  };
+
+  const howMany = (data: number) => {
+    setHowManyDiaries(data);
   };
 
   return (
@@ -32,13 +37,14 @@ export default function LogedInDefault({ userName }: { userName: string }) {
           </PrimaryButton>
           <InnerWrapper>
             <span>Recent diaries</span>
-            <ShowMoreButton>
+            <ShowMoreButton howManyDiaries={howManyDiaries!}>
               Show more
               <Image src={arrowRight} width={20} alt="arrow right icon" />
             </ShowMoreButton>
           </InnerWrapper>
           <TravelCardsWrapper>
             <TravelCards
+              howMany={howMany}
               refresh={refresh}
               setRefresh={setRefresh}
               areLimited={true}

@@ -23,13 +23,17 @@ type setIsActive = (
 
 export default function ShowMoreButton({
   children,
+  howManyDiaries,
 }: {
   // TODO: Check that type
   children: React.ReactNode;
+  howManyDiaries?: number;
 }) {
   const { setIsActive }: { setIsActive?: setIsActive } = useContext(
     ShowMoreButtonContext
   );
+
+  if (howManyDiaries! < 4) return null;
 
   return (
     <Button onClick={() => setIsActive!((prev) => !prev)}>{children}</Button>
