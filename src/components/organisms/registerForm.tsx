@@ -81,7 +81,9 @@ export default function RegisterForm() {
       />
       <InnerWrapper>
         <LoginLink href="/">Log In</LoginLink>
-        <PrimaryButton type="submit">Sign Up</PrimaryButton>
+        <PrimaryButton type="submit" isActive={false}>
+          Sign Up
+        </PrimaryButton>
       </InnerWrapper>
     </form>
   );

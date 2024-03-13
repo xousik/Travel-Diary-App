@@ -34,6 +34,7 @@ type ButtonProps = {
   width?: number;
   height?: number;
   fontSize?: number;
+  isActive: boolean;
 };
 
 export default function PrimaryButton({
@@ -42,6 +43,7 @@ export default function PrimaryButton({
   width,
   height,
   fontSize,
+  isActive,
 }: ButtonProps) {
   const {
     setIsActive,
@@ -51,7 +53,7 @@ export default function PrimaryButton({
 
   return (
     <Button
-      onClick={() => setIsActive!((prev: boolean) => !prev)}
+      onClick={() => isActive && setIsActive!((prev: boolean) => !prev)}
       type={type}
       width={width}
       height={height}

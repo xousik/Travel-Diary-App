@@ -16,14 +16,18 @@ export default function TravelCards({
   setRefresh,
   areLimited,
   howMany,
+  setAreDiariesLoading,
 }: {
   refresh: boolean;
   setRefresh: React.Dispatch<SetStateAction<boolean>>;
   areLimited: boolean;
   howMany?: ((data: number) => void) | undefined;
+  setAreDiariesLoading?: React.Dispatch<SetStateAction<boolean>>;
 }) {
   const [diaries, setDiaries] = useState<Diary[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  setAreDiariesLoading && setAreDiariesLoading(isLoading);
 
   const apiLink = "http://localhost:3000/api/diary";
 

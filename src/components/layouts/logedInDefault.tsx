@@ -16,6 +16,7 @@ import DiaryDetailsModal from "../organisms/diaryDetailsModal/diaryDetailsModal"
 export default function LogedInDefault({ userName }: { userName: string }) {
   const [refresh, setRefresh] = useState<boolean>(false);
   const [howManyDiaries, setHowManyDiaries] = useState<number>();
+  const [areDiariesLoading, setAreDiariesLoading] = useState<boolean>(true);
 
   const handleRefresh = () => {
     // Toggle the state to trigger a re-render of the child component
@@ -32,12 +33,15 @@ export default function LogedInDefault({ userName }: { userName: string }) {
       <LogedHeader userName={userName!} />
       <BackgroundImgLayout isLoged={true} handleRefresh={handleRefresh}>
         <Wrapper>
-          <PrimaryButton width={15} height={4.4} fontSize={30}>
+          <PrimaryButton width={15} height={4.4} fontSize={30} isActive={true}>
             Create new diary
           </PrimaryButton>
           <InnerWrapper>
             <span>Recent diaries</span>
-            <ShowMoreButton howManyDiaries={howManyDiaries!}>
+            <ShowMoreButton
+              howManyDiaries={howManyDiaries!}
+              areDiariesLoading={areDiariesLoading}
+            >
               Show more
               <Image src={arrowRight} width={20} alt="arrow right icon" />
             </ShowMoreButton>
@@ -48,6 +52,7 @@ export default function LogedInDefault({ userName }: { userName: string }) {
               refresh={refresh}
               setRefresh={setRefresh}
               areLimited={true}
+              setAreDiariesLoading={setAreDiariesLoading}
             />
           </TravelCardsWrapper>
         </Wrapper>
