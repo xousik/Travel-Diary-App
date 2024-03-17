@@ -48,22 +48,20 @@ export default function DiaryDetailsModal() {
   const [images, setImages] = useState<string[]>([]);
 
   useEffect(() => {
-    if (isModalOpen) {
-      const getImages = async () => {
-        const images: string[] = [];
-        for (let i = 0; i < activeTravelCardInfo!.images.length; i++) {
-          const url =
-            "https://res.cloudinary.com/dq0x2a3gj/image/upload/v1707244671/" +
-            activeTravelCardInfo!.images[i] +
-            ".jpg";
-          await fetch(url).then((response) => {
-            images.push(response.url);
-          });
-        }
-        setImages(images);
-      };
-      getImages();
-    }
+    const getImages = async () => {
+      const images: string[] = [];
+      for (let i = 0; i < activeTravelCardInfo!.images.length; i++) {
+        const url =
+          "https://res.cloudinary.com/dq0x2a3gj/image/upload/v1707244671/" +
+          activeTravelCardInfo!.images[i] +
+          ".jpg";
+        await fetch(url).then((response) => {
+          images.push(response.url);
+        });
+      }
+      setImages(images);
+    };
+    getImages();
 
     setImages([]);
 
