@@ -5,7 +5,7 @@ import Input from "../atoms/formInput";
 import Link from "next/link";
 import PrimaryButton from "../atoms/primaryButton";
 import { signIn } from "next-auth/react";
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 const InnerWrapper = styled.div`
@@ -22,23 +22,18 @@ const LoginLink = styled(Link)`
 `;
 
 export default function RegisterForm() {
-  const [email, setEmail] = useState<string>("");
-  const [name, setName] = useState<string>("");
+  const emailInputRef = useRef<HTMLInputElement | null>(null);
+  const nameInputRef = useRef<HTMLInputElement | null>(null);
 
   const router = useRouter();
-
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
-
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
-  };
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    const submitData = { name, email };
+    const submitData = {
+      name: nameInputRef.current?.value,
+      email: emailInputRef.current?.value,
+    };
 
     try {
       const res = await fetch("http://localhost:3000/api/user", {
@@ -50,7 +45,7 @@ export default function RegisterForm() {
       });
       if (res.status === 200) {
         signIn("email", {
-          email,
+          email: emailInputRef.current?.value,
           callbackUrl: "http://localhost:3000/logedin",
         });
       } else if (res.status === 409) {
@@ -68,17 +63,10 @@ export default function RegisterForm() {
       <Input
         name="E-mail"
         inputType="email"
-        value={email}
-        onChange={(e) => handleEmailChange(e)}
         hasIcon={true}
+        ref={emailInputRef}
       />
-      <Input
-        name="Name"
-        inputType="name"
-        value={name}
-        onChange={(e) => handleNameChange(e)}
-        hasIcon={true}
-      />
+      <Input name="Name" inputType="name" hasIcon={true} ref={nameInputRef} />
       <InnerWrapper>
         <LoginLink href="/">Log In</LoginLink>
         <PrimaryButton type="submit" isActive={false}>

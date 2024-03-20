@@ -85,8 +85,6 @@ export default function DiaryDetailsModal() {
 
   if (!isModalOpen) return null;
 
-  console.log(images);
-
   return (
     <ModalOverlay onClick={() => setIsModalOpen!((prev: boolean) => !prev)}>
       <Modal onClick={(e) => e.stopPropagation()}>

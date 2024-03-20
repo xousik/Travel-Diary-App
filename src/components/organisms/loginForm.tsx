@@ -5,7 +5,7 @@ import Link from "next/link";
 import Input from "../atoms/formInput";
 import PrimaryButton from "../atoms/primaryButton";
 import { signIn } from "next-auth/react";
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef } from "react";
 
 const InnerWrapper = styled.div`
   display: flex;
@@ -21,19 +21,15 @@ const RegisterLink = styled(Link)`
 `;
 
 export default function LoginForm() {
-  const [email, setEmail] = useState<string>("");
+  const emailInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
     signIn("email", {
-      email,
+      email: emailInputRef.current?.value,
       callbackUrl: "http://localhost:3000/logedin",
     });
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
   };
 
   return (
@@ -41,8 +37,7 @@ export default function LoginForm() {
       <Input
         name="E-mail"
         inputType="email"
-        value={email}
-        onChange={(e) => handleChange(e)}
+        ref={emailInputRef}
         hasIcon={true}
       />
       <InnerWrapper>

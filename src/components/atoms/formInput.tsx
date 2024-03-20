@@ -4,6 +4,7 @@ import styled from "styled-components";
 import userSvg from "@/public/user.svg";
 import passwordSvg from "@/public/password.svg";
 import Image from "next/image";
+import { forwardRef } from "react";
 
 const Wrapper = styled.div`
   width: 30rem;
@@ -80,18 +81,13 @@ function chooseInputType(inputType: string) {
 type FormInputProps = {
   name: string;
   inputType: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   hasIcon?: boolean;
 };
 
-export default function FormInput({
-  name,
-  inputType,
-  value,
-  onChange,
-  hasIcon,
-}: FormInputProps) {
+const FormInput = forwardRef(function FormInput(
+  { name, inputType, hasIcon }: FormInputProps,
+  ref: React.ForwardedRef<HTMLInputElement>
+) {
   const iconType = () => chooseIcon(inputType);
   const type = () => chooseInputType(inputType);
   return (
@@ -100,11 +96,12 @@ export default function FormInput({
         type={type()}
         name={name.toLowerCase()}
         placeholder={name}
-        value={value}
-        onChange={onChange}
+        ref={ref}
       />
       {hasIcon && <Svg src={iconType()} alt="input icon" />}
       <label htmlFor={name.toLowerCase()} />
     </Wrapper>
   );
-}
+});
+
+export default FormInput;

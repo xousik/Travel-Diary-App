@@ -29,9 +29,6 @@ export default function CreateNewDiaryForm({
 }: {
   handleRefresh: () => void;
 }) {
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [date, setDate] = useState<string>("");
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [isIconBoxActive, setIsIconBoxActive] = useState<boolean>(false);
   const [isImageBoxActive, setIsImageBoxActive] = useState<boolean>(false);
@@ -44,20 +41,9 @@ export default function CreateNewDiaryForm({
   } = useContext(BackgroundImageStateContext);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-  };
-
-  const handleDescriptionChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setDescription(event.target.value);
-  };
-
-  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDate(event.target.value);
-  };
+  const titleInputRef = useRef<HTMLInputElement | null>(null);
+  const descriptionInputRef = useRef<HTMLTextAreaElement | null>(null);
+  const dateInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -97,9 +83,9 @@ export default function CreateNewDiaryForm({
     e.preventDefault();
 
     const submitData = {
-      title,
-      description,
-      date,
+      title: titleInputRef.current?.value,
+      description: descriptionInputRef.current?.value,
+      date: dateInputRef.current?.value,
       choosenIcon,
       selectedImages,
     };
@@ -114,9 +100,9 @@ export default function CreateNewDiaryForm({
       });
 
       setIsActive!(false);
-      setTitle("");
-      setDescription("");
-      setDate("");
+      titleInputRef.current!.value = "";
+      descriptionInputRef.current!.value = "";
+      dateInputRef.current!.value = "";
       setIsImageBoxActive(false);
       setIsIconBoxActive(false);
       setChoosenIcon("mountain");
@@ -138,20 +124,10 @@ export default function CreateNewDiaryForm({
         name="Title"
         type="title"
         placeholder="Title"
-        value={title}
-        onChange={(e) => handleTitleChange(e)}
+        ref={titleInputRef}
       />
-      <StyledTextarea
-        value={description}
-        onChange={(e) => handleDescriptionChange(e)}
-        placeholder="Description"
-      />
-      <Input
-        name="date"
-        type="date"
-        value={date}
-        onChange={(e) => handleDateChange(e)}
-      />
+      <StyledTextarea placeholder="Description" ref={descriptionInputRef} />
+      <Input name="date" type="date" ref={dateInputRef} />
       <InnerWrapper>
         <ImageInputContainer>
           {/* AddImageBox should be drag and drop area and Image should has on click function that will triger image upload */}
@@ -187,7 +163,9 @@ export default function CreateNewDiaryForm({
           />
         </ChooseIconWrapper>
       </InnerWrapper>
-      <PrimaryButton type="submit">Add diary</PrimaryButton>
+      <PrimaryButton type="submit" isActive={false}>
+        Add diary
+      </PrimaryButton>
     </StyledForm>
   );
 }

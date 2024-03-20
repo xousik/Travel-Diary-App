@@ -27,8 +27,6 @@ export default function TravelCards({
   const [diaries, setDiaries] = useState<Diary[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  setAreDiariesLoading && setAreDiariesLoading(isLoading);
-
   const apiLink = "http://localhost:3000/api/diary";
 
   useEffect(() => {
@@ -48,6 +46,7 @@ export default function TravelCards({
             }
             howMany && howMany!(data.length);
             setIsLoading(false);
+            setAreDiariesLoading && setAreDiariesLoading(false);
           });
       } catch (error) {
         console.error("Error fetching user diaries:", error);
@@ -55,7 +54,7 @@ export default function TravelCards({
     };
 
     fetchData();
-  }, [refresh, areLimited, howMany]);
+  }, [refresh, areLimited, howMany, setAreDiariesLoading]);
 
   const handleDelete = async (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,
