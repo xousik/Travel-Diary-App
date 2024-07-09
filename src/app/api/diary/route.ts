@@ -25,7 +25,11 @@ export async function POST(req: NextRequest) {
   try {
     // Upload the image
     for (let i = 0; i < data.selectedImages.length; i++) {
-      const result = await cloudinary.uploader.upload(data.selectedImages[i]);
+      const result = await cloudinary.uploader.upload(data.selectedImages[i], {
+        folder: `TravelDiaryApp/${currentUser!.name}  ${currentUser!.id}/${
+          data.title
+        }`,
+      });
       imagesId.push(result.public_id);
     }
     // return result.public_id;
