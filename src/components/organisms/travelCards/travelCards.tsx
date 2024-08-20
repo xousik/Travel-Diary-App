@@ -17,19 +17,15 @@ export default function TravelCards({
   setRefresh,
   areLimited,
   setHowManyDiaries,
-  setAreDiariesLoading,
 }: {
   refresh: boolean;
   setRefresh: React.Dispatch<SetStateAction<boolean>>;
   areLimited: boolean;
   setHowManyDiaries?: React.Dispatch<SetStateAction<number | undefined>>;
-  setAreDiariesLoading?: React.Dispatch<SetStateAction<boolean>>;
 }) {
   const [diaries, setDiaries] = useState<Diary[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [sortOrder, setSortOrder] = useState("asc");
-
-  setAreDiariesLoading && setAreDiariesLoading(isLoading);
 
   const handleSort = (data: Diary[]) => {
     const sortedData = [...data].sort((a, b) => {
