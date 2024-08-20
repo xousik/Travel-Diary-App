@@ -104,22 +104,22 @@ export default function TravelCards({
 
   return (
     <>
-      {isLoading && areLimited ? (
-        <SkeletonTravelCard itemCount={3} />
-      ) : (
-        diaries.map((diary: Diary) => (
-          <TravelCard
-            key={diary.id}
-            id={diary.id}
-            title={diary.title}
-            date={diary.date}
-            icon={diary.icon}
-            description={diary.description}
-            images={diary.imagesId}
-            handleDelete={handleDelete}
-          />
-        ))
-      )}
+      {isLoading && areLimited
+        ? Array(3)
+            .fill(0)
+            .map((_, i) => <SkeletonTravelCard key={i} />)
+        : diaries.map((diary: Diary) => (
+            <TravelCard
+              key={diary.id}
+              id={diary.id}
+              title={diary.title}
+              date={diary.date}
+              icon={diary.icon}
+              description={diary.description}
+              images={diary.imagesId}
+              handleDelete={handleDelete}
+            />
+          ))}
     </>
   );
 }

@@ -52,13 +52,9 @@ const DeleteImagePlaceholder = styled.div`
   border-radius: 0.5rem;
 `;
 
-export default function SkeletonTravelCard({
-  itemCount,
-}: {
-  itemCount: number;
-}) {
-  const SkeletonItems = Array.from({ length: itemCount }, (index: number) => (
-    <Wrapper key={index}>
+export default function SkeletonTravelCard() {
+  return (
+    <Wrapper>
       <InnerWrapper>
         <h3 />
         <span />
@@ -66,6 +62,5 @@ export default function SkeletonTravelCard({
       <ImagePlaceHolder />
       <DeleteImagePlaceholder />
     </Wrapper>
-  ));
-  return SkeletonItems;
+  );
 }

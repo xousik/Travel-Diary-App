@@ -16,7 +16,6 @@ import DiaryDetailsModal from "../organisms/diaryDetailsModal/diaryDetailsModal"
 export default function LogedInDefault({ userName }: { userName: string }) {
   const [refresh, setRefresh] = useState<boolean>(false);
   const [howManyDiaries, setHowManyDiaries] = useState<number>();
-  // const [areDiariesLoading, setAreDiariesLoading] = useState<boolean>(true);
 
   const handleRefresh = () => {
     // Toggle the state to trigger a re-render of the child component

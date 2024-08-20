@@ -31,7 +31,7 @@ export default function LogedInShowMore({ userName }: { userName: string }) {
       {/* Year navigation */}
       <YearNavigation />
       <Wrapper>
-        <ShowMoreButton>
+        <ShowMoreButton howManyDiaries={4}>
           <StyledImage src={arrowRight} width={20} alt="arrow right icon" />
           Show Less
         </ShowMoreButton>
