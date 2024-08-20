@@ -1,5 +1,6 @@
 import { useState, useEffect, SetStateAction } from "react";
 import TravelCard from "../../molecules/travelCard";
+import SkeletonTravelCard from "../../molecules/skeletonLoading/skeletonTravelCard";
 
 export type Diary = {
   id: string;
@@ -15,17 +16,32 @@ export default function TravelCards({
   refresh,
   setRefresh,
   areLimited,
-  howMany,
+  setHowManyDiaries,
   setAreDiariesLoading,
 }: {
   refresh: boolean;
   setRefresh: React.Dispatch<SetStateAction<boolean>>;
   areLimited: boolean;
-  howMany?: ((data: number) => void) | undefined;
+  setHowManyDiaries?: React.Dispatch<SetStateAction<number | undefined>>;
   setAreDiariesLoading?: React.Dispatch<SetStateAction<boolean>>;
 }) {
   const [diaries, setDiaries] = useState<Diary[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [sortOrder, setSortOrder] = useState("asc");
+
+  setAreDiariesLoading && setAreDiariesLoading(isLoading);
+
+  const handleSort = (data: Diary[]) => {
+    const sortedData = [...data].sort((a, b) => {
+      const dateA: any = new Date(a.date);
+      const dateB: any = new Date(b.date);
+
+      return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+    });
+
+    setSortOrder(sortOrder === "asc" ? "asc" : "desc");
+    return sortedData;
+  };
 
   const apiLink = "http://localhost:3000/api/diary";
 
@@ -36,17 +52,19 @@ export default function TravelCards({
         await fetch(apiLink)
           .then((response) => response.json())
           .then((data: Diary[]) => {
-            // Set max amount of travel cards to 3
-            if (areLimited && data.length > 3) {
-              setDiaries(data.slice(data.length - 3, data.length).reverse());
-            } else if (areLimited && data.length < 4) {
-              setDiaries(data.slice(0, data.length).reverse());
+            const sortedData = handleSort(data);
+
+            if (areLimited) {
+              setDiaries(
+                sortedData
+                  .slice(sortedData.length - 3, sortedData.length)
+                  .reverse()
+              );
             } else {
-              setDiaries(data);
+              setDiaries(sortedData.reverse());
             }
-            howMany && howMany!(data.length);
+            setHowManyDiaries && setHowManyDiaries(sortedData.length);
             setIsLoading(false);
-            setAreDiariesLoading && setAreDiariesLoading(false);
           });
       } catch (error) {
         console.error("Error fetching user diaries:", error);
@@ -54,7 +72,9 @@ export default function TravelCards({
     };
 
     fetchData();
-  }, [refresh, areLimited, howMany, setAreDiariesLoading]);
+    // It's to remove warning about missing dependency - handleSort function in the dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refresh, areLimited, setHowManyDiaries]);
 
   const handleDelete = async (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,
@@ -88,8 +108,8 @@ export default function TravelCards({
 
   return (
     <>
-      {isLoading ? (
-        <h3>Loading diaries ....</h3>
+      {isLoading && areLimited ? (
+        <SkeletonTravelCard itemCount={3} />
       ) : (
         diaries.map((diary: Diary) => (
           <TravelCard

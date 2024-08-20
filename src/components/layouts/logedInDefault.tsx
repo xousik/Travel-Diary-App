@@ -23,10 +23,6 @@ export default function LogedInDefault({ userName }: { userName: string }) {
     setRefresh((prevRefresh) => !prevRefresh);
   };
 
-  const howMany = (data: number) => {
-    setHowManyDiaries(data);
-  };
-
   return (
     <>
       <DiaryDetailsModal />
@@ -48,7 +44,7 @@ export default function LogedInDefault({ userName }: { userName: string }) {
           </InnerWrapper>
           <TravelCardsWrapper>
             <TravelCards
-              howMany={howMany}
+              setHowManyDiaries={setHowManyDiaries}
               refresh={refresh}
               setRefresh={setRefresh}
               areLimited={true}
