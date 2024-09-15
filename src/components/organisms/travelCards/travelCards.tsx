@@ -1,4 +1,4 @@
-import { useState, useEffect, SetStateAction } from "react";
+import { useState, useEffect, SetStateAction, act } from "react";
 import TravelCard from "../../molecules/travelCard";
 import SkeletonTravelCard from "../../molecules/skeletonLoading/skeletonTravelCard";
 
@@ -78,7 +78,7 @@ export default function TravelCards({
     fetchData();
     // It's to remove warning about missing dependency - handleSort function in the dependency array
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refresh, areLimited, setHowManyDiaries]);
+  }, [refresh, areLimited, setHowManyDiaries, activeYear]);
 
   const handleDelete = async (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,
