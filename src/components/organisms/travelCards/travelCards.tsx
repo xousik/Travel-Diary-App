@@ -52,7 +52,6 @@ export default function TravelCards({
         await fetch(apiLink)
           .then((response) => response.json())
           .then((data: Diary[]) => {
-            console.log(activeYear);
             const filteredData = data.filter((diary) =>
               diary.date.includes(activeYearString!)
             );
