@@ -79,8 +79,8 @@ export const ChooseIconWrapper = styled.div`
   }
 `;
 
-export const AddImageBox = styled.div<{ isimageboxactive?: number }>`
-  display: ${({ isimageboxactive }) => (isimageboxactive ? "flex" : "none")};
+export const AddImageBox = styled.div<{ $isimageboxactive?: number }>`
+  display: ${({ $isimageboxactive }) => ($isimageboxactive ? "flex" : "none")};
   position: absolute;
   align-items: center;
   justify-content: center;

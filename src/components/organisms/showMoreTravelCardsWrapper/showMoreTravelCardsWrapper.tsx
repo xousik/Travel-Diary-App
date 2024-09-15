@@ -11,20 +11,20 @@ type ShowMoreTravelCardsWrapperProps = {
   activeYear: number;
 };
 
+const StyledTravelCardsWrapper = styled(TravelCardsWrapper)`
+  height: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-items: center;
+  align-content: start;
+  padding: 2rem 0;
+`;
+
 export default function ShowMoreTravelCardsWrapper({
   setRefresh,
   refresh,
   activeYear,
 }: ShowMoreTravelCardsWrapperProps) {
-  const StyledTravelCardsWrapper = styled(TravelCardsWrapper)`
-    height: 100%;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    justify-items: center;
-    align-content: start;
-    padding: 2rem 0;
-  `;
-
   return (
     <StyledTravelCardsWrapper>
       <TravelCards

@@ -2,17 +2,17 @@ import styled from "styled-components";
 import Image from "next/image";
 import Tilt from "react-parallax-tilt";
 
-export const Wrapper = styled.div<{ isloged: number }>`
+export const Wrapper = styled.div<{ $isloged: number }>`
   display: flex;
   justify-content: space-between;
-  height: ${({ isloged }) => (isloged ? "92%" : "100%")};
+  height: ${({ $isloged }) => ($isloged ? "92%" : "100%")};
   width: 100%;
   overflow-y: hidden;
 `;
 
-export const StyledImage = styled(Image)<{ isloged: number }>`
+export const StyledImage = styled(Image)<{ $isloged: number }>`
   width: 100%;
-  height: ${({ isloged }) => (isloged ? "100%" : "90%")};
+  height: ${({ $isloged }) => ($isloged ? "100%" : "90%")};
   border-radius: 1rem;
   box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.25);
 `;
@@ -25,7 +25,7 @@ export const OuterWrapper = styled.div`
   perspective: 1000px;
 `;
 
-export const InnerWrapper = styled.div<{ isactive: number }>`
+export const InnerWrapper = styled.div<{ $isactive: number }>`
   position: relative;
   width: 100%;
   height: 100%;
@@ -33,7 +33,7 @@ export const InnerWrapper = styled.div<{ isactive: number }>`
   transition: transform 0.8s;
   transform-style: preserve-3d;
 
-  transform: ${({ isactive }) => isactive && "rotateY(180deg)"};
+  transform: ${({ $isactive }) => $isactive && "rotateY(180deg)"};
 `;
 
 export const StyledTilt = styled(Tilt)`

@@ -30,10 +30,10 @@ export default function BackgroundImgLayout({
   } = useContext(BackgroundImageStateContext);
 
   return (
-    <Wrapper isloged={isLoged! ? 1 : 0}>
+    <Wrapper $isloged={isLoged! ? 1 : 0}>
       <Container>{children}</Container>
       <OuterWrapper>
-        <InnerWrapper isactive={isActive ? 1 : 0}>
+        <InnerWrapper $isactive={isActive ? 1 : 0}>
           <StyledTilt
             tiltReverse={true}
             tiltMaxAngleX={5}
@@ -42,7 +42,7 @@ export default function BackgroundImgLayout({
             transitionSpeed={2000}
           >
             <StyledImage
-              isloged={isLoged! ? 1 : 0}
+              $isloged={isLoged! ? 1 : 0}
               src={backgroundImg}
               alt="campervan on desert"
             />

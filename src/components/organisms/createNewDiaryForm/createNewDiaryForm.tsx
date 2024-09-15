@@ -116,8 +116,6 @@ export default function CreateNewDiaryForm({
     }
   };
 
-  console.log(selectedImages);
-
   return (
     <StyledForm onSubmit={(e) => handleSubmit(e)}>
       <Input
@@ -133,7 +131,7 @@ export default function CreateNewDiaryForm({
           {/* AddImageBox should be drag and drop area and Image should has on click function that will triger image upload */}
           <AddImageBox
             onClick={() => fileInputRef.current?.click()}
-            isimageboxactive={isImageBoxActive ? 1 : 0}
+            $isimageboxactive={isImageBoxActive ? 1 : 0}
           >
             <Image src={plusSvg} alt="plus icon" height={65} width={65} />
           </AddImageBox>

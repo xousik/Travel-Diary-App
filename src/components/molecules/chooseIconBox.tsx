@@ -9,9 +9,9 @@ import planeSvg from "@/public/plane.svg";
 import { SetStateAction } from "react";
 
 const Wrapper = styled.div<{
-  isiconboxactive?: number;
+  $isiconboxactive?: number;
 }>`
-  display: ${({ isiconboxactive }) => (isiconboxactive ? "grid" : "none")};
+  display: ${({ $isiconboxactive }) => ($isiconboxactive ? "grid" : "none")};
   grid-template-columns: 1fr 1fr;
   align-items: center;
   justify-items: center;
@@ -44,7 +44,7 @@ export const ChooseIconBox = ({
   };
 
   return (
-    <Wrapper isiconboxactive={isIconBoxActive ? 1 : 0}>
+    <Wrapper $isiconboxactive={isIconBoxActive ? 1 : 0}>
       <Image
         src={palmTreeSvg}
         alt="palm tree icon"
