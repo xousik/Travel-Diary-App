@@ -8,11 +8,13 @@ import { TravelCardsWrapper } from "@/src/app/logedin/page.styles";
 type ShowMoreTravelCardsWrapperProps = {
   setRefresh: React.Dispatch<SetStateAction<boolean>>;
   refresh: boolean;
+  activeYear: number;
 };
 
 export default function ShowMoreTravelCardsWrapper({
   setRefresh,
   refresh,
+  activeYear,
 }: ShowMoreTravelCardsWrapperProps) {
   const StyledTravelCardsWrapper = styled(TravelCardsWrapper)`
     height: 100%;
@@ -29,6 +31,7 @@ export default function ShowMoreTravelCardsWrapper({
         areLimited={false}
         setRefresh={setRefresh}
         refresh={refresh}
+        activeYear={activeYear}
       />
     </StyledTravelCardsWrapper>
   );

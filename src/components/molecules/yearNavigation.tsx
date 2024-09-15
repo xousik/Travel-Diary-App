@@ -4,6 +4,7 @@ import styled from "styled-components";
 import arrowLeftLong from "@/public/arrowLeftLong.svg";
 import arrowRightLong from "@/public/arrowRightLong.svg";
 import Image from "next/image";
+import { useState } from "react";
 
 const Wrapper = styled.div`
   height: 4rem;
@@ -19,8 +20,9 @@ const Wrapper = styled.div`
   }
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ hidden?: boolean }>`
   display: flex;
+  visibility: ${({ hidden }) => hidden && "hidden"};
   align-items: center;
   border: none;
   background-color: transparent;
@@ -28,14 +30,33 @@ const Button = styled.button`
   height: 100%;
 `;
 
-export default function YearNavigation() {
+type YearNavigationProps = {
+  activeYear: number;
+  setActiveYear: React.Dispatch<React.SetStateAction<number>>;
+};
+
+export default function YearNavigation({
+  activeYear,
+  setActiveYear,
+}: YearNavigationProps) {
+  function nextYear() {
+    setActiveYear((prev) => (prev += 1));
+  }
+
+  function previousYear() {
+    setActiveYear((prev) => (prev -= 1));
+  }
+
   return (
     <Wrapper>
-      <Button>
+      <Button onClick={previousYear}>
         <Image src={arrowLeftLong} width={80} alt="" />
       </Button>
-      <h2>2023</h2>
-      <Button>
+      <h2>{activeYear}</h2>
+      <Button
+        onClick={nextYear}
+        hidden={activeYear === new Date().getFullYear() && true}
+      >
         <Image src={arrowRightLong} width={80} alt="" />
       </Button>
     </Wrapper>

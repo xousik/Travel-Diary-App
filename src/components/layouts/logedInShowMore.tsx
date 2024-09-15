@@ -9,7 +9,7 @@ import DiaryDetailsModal from "../organisms/diaryDetailsModal/diaryDetailsModal"
 import ShowMoreTravelCardsWrapper from "../organisms/showMoreTravelCardsWrapper/showMoreTravelCardsWrapper";
 
 const OuterWrapper = styled.div`
-  max-height: 100%;
+  height: fit-content;
 `;
 
 const Wrapper = styled.div`
@@ -24,12 +24,16 @@ const StyledImage = styled(Image)`
 
 export default function LogedInShowMore({ userName }: { userName: string }) {
   const [refresh, setRefresh] = useState<boolean>(false);
+  const [activeYear, setActiveYear] = useState<number>(
+    new Date().getFullYear()
+  );
+
   return (
     <OuterWrapper>
       <DiaryDetailsModal />
       <LogedHeader userName={userName!} />
       {/* Year navigation */}
-      <YearNavigation />
+      <YearNavigation activeYear={activeYear} setActiveYear={setActiveYear} />
       <Wrapper>
         <ShowMoreButton howManyDiaries={4}>
           <StyledImage src={arrowRight} width={20} alt="arrow right icon" />
@@ -37,7 +41,11 @@ export default function LogedInShowMore({ userName }: { userName: string }) {
         </ShowMoreButton>
       </Wrapper>
       {/* Div with Travel Cards */}
-      <ShowMoreTravelCardsWrapper refresh={refresh} setRefresh={setRefresh} />
+      <ShowMoreTravelCardsWrapper
+        refresh={refresh}
+        setRefresh={setRefresh}
+        activeYear={activeYear}
+      />
     </OuterWrapper>
   );
 }

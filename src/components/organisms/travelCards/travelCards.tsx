@@ -17,11 +17,13 @@ export default function TravelCards({
   setRefresh,
   areLimited,
   setHowManyDiaries,
+  activeYear,
 }: {
   refresh: boolean;
   setRefresh: React.Dispatch<SetStateAction<boolean>>;
   areLimited: boolean;
   setHowManyDiaries?: React.Dispatch<SetStateAction<number | undefined>>;
+  activeYear?: number;
 }) {
   const [diaries, setDiaries] = useState<Diary[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -39,6 +41,8 @@ export default function TravelCards({
     return sortedData;
   };
 
+  const activeYearString = activeYear?.toString();
+
   const apiLink = "http://localhost:3000/api/diary";
 
   useEffect(() => {
@@ -48,18 +52,22 @@ export default function TravelCards({
         await fetch(apiLink)
           .then((response) => response.json())
           .then((data: Diary[]) => {
-            const sortedData = handleSort(data);
+            const filteredData = data.filter((diary) =>
+              diary.date.includes(activeYearString!)
+            );
 
             if (areLimited) {
+              const sortedData = handleSort(data);
               setDiaries(
                 sortedData
                   .slice(sortedData.length - 3, sortedData.length)
                   .reverse()
               );
             } else {
+              const sortedData = handleSort(filteredData);
               setDiaries(sortedData.reverse());
             }
-            setHowManyDiaries && setHowManyDiaries(sortedData.length);
+            setHowManyDiaries && setHowManyDiaries(data.length);
             setIsLoading(false);
           });
       } catch (error) {
