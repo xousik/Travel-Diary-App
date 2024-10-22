@@ -119,6 +119,7 @@ export default function CreateNewDiaryForm({
   return (
     <StyledForm onSubmit={(e) => handleSubmit(e)}>
       <Input
+        required
         name="Title"
         type="title"
         placeholder="Title"

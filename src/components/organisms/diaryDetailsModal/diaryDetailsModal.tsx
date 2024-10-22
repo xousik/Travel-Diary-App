@@ -6,21 +6,21 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import {
+  ModalOverlay,
+  Modal,
+  StyledButton,
+  Wrapper,
+  StyledImage,
+} from "./diaryDetailsModal.styles";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 import closeSvg from "@/public/close.svg";
 import Image from "next/image";
-import { ModalOverlay, Modal, StyledButton } from "./diaryDetailsModal.styles";
-import styled from "styled-components";
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const StyledImage = styled(Image)`
-  border-radius: 20px;
-  margin: 0 1rem;
-`;
-
 export type DiaryDetailsModalContextProps = {
   setActiveTravelCardInfo?: Dispatch<
     SetStateAction<{
@@ -94,15 +94,38 @@ export default function DiaryDetailsModal() {
         <h3>{activeTravelCardInfo!.title}</h3>
         <p>{activeTravelCardInfo!.description}</p>
         <Wrapper>
-          {images.map((image) => (
-            <StyledImage
-              key={image}
-              src={image}
-              alt="Image"
-              width={300}
-              height={300}
-            />
-          ))}
+          <Swiper
+            slideToClickedSlide={true}
+            effect={"coverflow"}
+            grabCursor={true}
+            centeredSlides={true}
+            // loop={true}
+            slidesPerView={3}
+            coverflowEffect={{
+              rotate: 0,
+              stretch: -10,
+              depth: 120,
+              modifier: 2.5,
+              slideShadows: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[EffectCoverflow, Pagination, Navigation]}
+          >
+            {images.map((image, i) => (
+              <SwiperSlide key={i}>
+                <StyledImage
+                  key={i}
+                  loading="eager"
+                  src={image}
+                  alt="Image"
+                  width={300}
+                  height={300}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </Wrapper>
       </Modal>
     </ModalOverlay>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Image from "next/image";
 
 export const ModalOverlay = styled.div`
   position: fixed;
@@ -14,6 +15,7 @@ export const ModalOverlay = styled.div`
 `;
 
 export const Modal = styled.div`
+  overflow: hidden;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -37,13 +39,6 @@ export const Modal = styled.div`
     padding: 1rem;
     text-align: center;
   }
-
-  div {
-    height: 60%;
-    width: max-content;
-    font-size: 20px;
-    text-align: center;
-  }
 `;
 
 export const StyledButton = styled.button`
@@ -54,4 +49,55 @@ export const StyledButton = styled.button`
   border: none;
   right: 2rem;
   top: 1.5rem;
+`;
+
+export const Wrapper = styled.div`
+  height: max-content;
+  width: 100%;
+
+  .swiper {
+    overflow: visible;
+  }
+
+  .swiper-slide {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide-active {
+    scale: 1.2;
+  }
+  .swiper-pagination {
+    position: relative !important;
+    margin-top: 4rem;
+    width: auto;
+    height: auto;
+    &-bullet {
+      cursor: pointer;
+      width: 1rem;
+      height: 1rem;
+      display: inline-block;
+      border-radius: 50%;
+      background: ${({ theme }) => theme.colors.darkBeige};
+      opacity: 0.2;
+      border: 1px solid ${({ theme }) => theme.colors.darkBeige};
+      margin: 0 5px;
+      box-shadow: none;
+      transform: scale(0.8);
+      &:hover,
+      &-active {
+        background-color: ${({ theme }) => theme.colors.darkBeige};
+        border-color: ${({ theme }) => theme.colors.darkBeige};
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  }
+`;
+
+export const StyledImage = styled(Image)`
+  border-radius: 20px;
 `;
