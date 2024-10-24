@@ -1,17 +1,16 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+"use client";
+
 import LogedinLayout from "@/src/components/layouts/logedInLayout";
 import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
 
-export default async function Logedin() {
+export default function Logedin() {
   let name;
-  const session = await getServerSession(authOptions);
+  const { data: session } = useSession();
 
-  if (session) {
-    name = session.user?.name;
-  } else {
+  if (!session) {
     redirect("/");
   }
-
+  name = session.user?.name;
   return <LogedinLayout userName={name!} />;
 }

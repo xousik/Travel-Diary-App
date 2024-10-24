@@ -91,7 +91,7 @@ export default function CreateNewDiaryForm({
     };
 
     try {
-      await fetch("http://localhost:3000/api/diary", {
+      await fetch("/api/diary", {
         method: "POST",
         body: JSON.stringify(submitData),
         headers: {

@@ -8,6 +8,8 @@ import { EB_Garamond } from "next/font/google";
 import { ShowMoreButtonContextProvider } from "../context/showMoreButtonContext";
 import { DiaryDetailsModalContextProvider } from "../context/diaryDetailsModalContext";
 import { BackgroundImageStateContextProvider } from "../context/backgroundImageStateContext";
+import { SessionProvider } from "next-auth/react";
+import type { Session } from "next-auth";
 
 const garamond = EB_Garamond({ subsets: ["latin"] });
 
@@ -17,8 +19,10 @@ const StyledBody = styled.body`
 
 export default function AppProviders({
   children,
+  session,
 }: {
   children: React.ReactNode;
+  session: Session | null;
 }) {
   return (
     <ThemeProvider theme={theme}>
@@ -26,7 +30,9 @@ export default function AppProviders({
         <DiaryDetailsModalContextProvider>
           <BackgroundImageStateContextProvider>
             <StyledBody className={garamond.className}>
-              <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+              <SessionProvider session={session}>
+                <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+              </SessionProvider>
             </StyledBody>
           </BackgroundImageStateContextProvider>
         </DiaryDetailsModalContextProvider>

@@ -36,7 +36,7 @@ export default function RegisterForm() {
     };
 
     try {
-      const res = await fetch("http://localhost:3000/api/user", {
+      const res = await fetch("/api/user", {
         method: "POST",
         body: JSON.stringify(submitData),
         headers: {
@@ -46,7 +46,7 @@ export default function RegisterForm() {
       if (res.status === 200) {
         signIn("email", {
           email: emailInputRef.current?.value,
-          callbackUrl: "http://localhost:3000/logedin",
+          callbackUrl: "/logedin",
         });
       } else if (res.status === 409) {
         alert("The user already exists, You can log in.");

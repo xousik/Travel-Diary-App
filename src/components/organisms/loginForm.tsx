@@ -28,7 +28,7 @@ export default function LoginForm() {
 
     signIn("email", {
       email: emailInputRef.current?.value,
-      callbackUrl: "http://localhost:3000/logedin",
+      callbackUrl: "/logedin",
     });
   };
 

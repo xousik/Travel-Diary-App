@@ -43,7 +43,7 @@ export default function TravelCards({
 
   const activeYearString = activeYear?.toString();
 
-  const apiLink = "http://localhost:3000/api/diary";
+  const apiLink = "/api/diary";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -88,7 +88,7 @@ export default function TravelCards({
 
     console.log("Delete button clicked");
 
-    await fetch("http://localhost:3000/api/deleteDiary", {
+    await fetch("/api/deleteDiary", {
       method: "POST",
       body: JSON.stringify({ id: travelCardId }),
       headers: {
