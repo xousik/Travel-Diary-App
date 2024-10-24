@@ -23,6 +23,7 @@ export const authOptions: NextAuthOptions = {
         return "/register";
       }
     },
+<<<<<<< HEAD
     async jwt({ token, user }) {
       // If it's the first time the token is created (after user signs in), add the user's ID to the token
       if (user) {
@@ -36,6 +37,8 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
+=======
+>>>>>>> a87a799 (Before deploy)
   },
   providers: [
     EmailProvider({
