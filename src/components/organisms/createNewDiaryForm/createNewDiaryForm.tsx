@@ -53,7 +53,7 @@ export default function CreateNewDiaryForm({
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
-    if (file) setSelectedImages([...selectedImages, file]);
+    if (file) selectedImages.push(file);
 
     // if (file) {
     //   const fileType: string = file.type;
@@ -106,17 +106,16 @@ export default function CreateNewDiaryForm({
         .then((data: ImageUploadResponse) => data.secure_url); // Capture the Cloudinary URL
     });
 
-    const submitData = {
-      title: titleInputRef.current?.value,
-      description: descriptionInputRef.current?.value,
-      date: dateInputRef.current?.value,
-      choosenIcon,
-      uploadedUrls,
-    };
-
     try {
       const urls = await Promise.all(uploadPromises);
-      setUploadedUrls(urls); // Store uploaded URLs in state
+
+      const submitData = {
+        title: titleInputRef.current?.value,
+        description: descriptionInputRef.current?.value,
+        date: dateInputRef.current?.value,
+        choosenIcon,
+        uploadedUrls: urls,
+      };
 
       await fetch("/api/diary", {
         method: "POST",
