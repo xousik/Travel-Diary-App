@@ -86,8 +86,6 @@ export default function TravelCards({
   ) => {
     e.stopPropagation();
 
-    console.log("Delete button clicked");
-
     await fetch("/api/deleteDiary", {
       method: "POST",
       body: JSON.stringify({ id: travelCardId }),

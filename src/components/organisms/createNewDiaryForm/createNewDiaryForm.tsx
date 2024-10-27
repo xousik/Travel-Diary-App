@@ -24,12 +24,17 @@ import {
 import { SetStateAction } from "react";
 import { BackgroundImageStateContext } from "@/src/context/backgroundImageStateContext";
 
+interface ImageUploadResponse {
+  secure_url: string;
+}
+
 export default function CreateNewDiaryForm({
   handleRefresh,
 }: {
   handleRefresh: () => void;
 }) {
-  const [selectedImages, setSelectedImages] = useState<string[]>([]);
+  const [selectedImages, setSelectedImages] = useState<File[]>([]);
+  const [uploadedUrls, setUploadedUrls] = useState<string[]>([]);
   const [isIconBoxActive, setIsIconBoxActive] = useState<boolean>(false);
   const [isImageBoxActive, setIsImageBoxActive] = useState<boolean>(false);
   const [choosenIcon, setChoosenIcon] = useState<string>("mountain");
@@ -48,20 +53,22 @@ export default function CreateNewDiaryForm({
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
-    if (file) {
-      const fileType: string = file.type;
-      if (fileType.startsWith("image/")) {
-        // You can use FileReader to read the image and convert it to a data URL
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setSelectedImages([...selectedImages, reader.result as string]);
-          setIsImageBoxActive(false);
-        };
-        reader.readAsDataURL(file);
-      } else {
-        alert("File is not an image");
-      }
-    }
+    if (file) setSelectedImages([...selectedImages, file]);
+
+    // if (file) {
+    //   const fileType: string = file.type;
+    //   if (fileType.startsWith("image/")) {
+    //     // You can use FileReader to read the image and convert it to a data URL
+    //     const reader = new FileReader();
+    //     reader.onloadend = () => {
+    //       setSelectedImages([...selectedImages, reader.result as string]);
+    //       setIsImageBoxActive(false);
+    //     };
+    //     reader.readAsDataURL(file);
+    //   } else {
+    //     alert("File is not an image");
+    //   }
+    // }
   };
 
   const handleIconSelect = (icon: string) => {
@@ -82,15 +89,35 @@ export default function CreateNewDiaryForm({
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
+    const cloudinaryUploadUrl = `https://api.cloudinary.com/v1_1/dq0x2a3gj/image/upload`;
+    const preset = "Unsigned preset for travel-diary-app";
+
+    const uploadPromises = selectedImages.map((image) => {
+      const formData = new FormData();
+      formData.append("file", image);
+      formData.append("upload_preset", preset);
+
+      // Each image upload is a separate request
+      return fetch(cloudinaryUploadUrl, {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data: ImageUploadResponse) => data.secure_url); // Capture the Cloudinary URL
+    });
+
     const submitData = {
       title: titleInputRef.current?.value,
       description: descriptionInputRef.current?.value,
       date: dateInputRef.current?.value,
       choosenIcon,
-      selectedImages,
+      uploadedUrls,
     };
 
     try {
+      const urls = await Promise.all(uploadPromises);
+      setUploadedUrls(urls); // Store uploaded URLs in state
+
       await fetch("/api/diary", {
         method: "POST",
         body: JSON.stringify(submitData),
@@ -112,7 +139,7 @@ export default function CreateNewDiaryForm({
       // TODO: Add some cool pop out box info " Correctly added new Diary! "
     } catch (error) {
       // TODO: How to properly handle errors ?
-      console.log(error);
+      console.error(error);
     }
   };
 
