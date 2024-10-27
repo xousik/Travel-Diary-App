@@ -23,15 +23,15 @@ export async function POST(req: NextRequest) {
   const currentUser = await getCurrentUser();
 
   try {
-    // Upload the image
-    for (let i = 0; i < data.selectedImages.length; i++) {
-      const result = await cloudinary.uploader.upload(data.selectedImages[i], {
-        folder: `TravelDiaryApp/${currentUser!.name}  ${currentUser!.id}/${
-          data.title
-        }`,
-      });
-      imagesId.push(result.public_id);
-    }
+    // // Upload the image
+    // for (let i = 0; i < data.selectedImages.length; i++) {
+    //   const result = await cloudinary.uploader.upload(data.selectedImages[i], {
+    //     folder: `TravelDiaryApp/${currentUser!.name}  ${currentUser!.id}/${
+    //       data.title
+    //     }`,
+    //   });
+    //   imagesId.push(result.public_id);
+    // }
     // return result.public_id;
     await prisma.diary.create({
       data: {
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
         description: data.description,
         date: data.date,
         icon: data.choosenIcon,
-        imagesId,
+        imagesId: data.uploadedUrls,
       },
     });
   } catch (error) {
