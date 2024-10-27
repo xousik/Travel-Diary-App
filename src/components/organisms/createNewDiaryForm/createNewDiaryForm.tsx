@@ -53,22 +53,10 @@ export default function CreateNewDiaryForm({
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
-    if (file) selectedImages.push(file);
-
-    // if (file) {
-    //   const fileType: string = file.type;
-    //   if (fileType.startsWith("image/")) {
-    //     // You can use FileReader to read the image and convert it to a data URL
-    //     const reader = new FileReader();
-    //     reader.onloadend = () => {
-    //       setSelectedImages([...selectedImages, reader.result as string]);
-    //       setIsImageBoxActive(false);
-    //     };
-    //     reader.readAsDataURL(file);
-    //   } else {
-    //     alert("File is not an image");
-    //   }
-    // }
+    if (file) {
+      selectedImages.push(file);
+      setIsImageBoxActive(false);
+    }
   };
 
   const handleIconSelect = (icon: string) => {
@@ -152,7 +140,7 @@ export default function CreateNewDiaryForm({
         ref={titleInputRef}
       />
       <StyledTextarea placeholder="Description" ref={descriptionInputRef} />
-      <Input name="date" type="date" ref={dateInputRef} />
+      <Input required name="date" type="date" ref={dateInputRef} />
       <InnerWrapper>
         <ImageInputContainer>
           {/* AddImageBox should be drag and drop area and Image should has on click function that will triger image upload */}

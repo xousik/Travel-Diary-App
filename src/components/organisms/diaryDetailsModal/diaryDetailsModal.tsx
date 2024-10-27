@@ -1,11 +1,5 @@
 import { DiaryDetailsModalContext } from "@/src/context/diaryDetailsModalContext";
-import React, {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { Dispatch, SetStateAction, useContext, useEffect } from "react";
 import {
   ModalOverlay,
   Modal,
@@ -21,6 +15,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import closeSvg from "@/public/close.svg";
 import Image from "next/image";
+
 export type DiaryDetailsModalContextProps = {
   setActiveTravelCardInfo?: Dispatch<
     SetStateAction<{
@@ -45,26 +40,7 @@ export default function DiaryDetailsModal() {
     isModalOpen,
   }: DiaryDetailsModalContextProps = useContext(DiaryDetailsModalContext);
 
-  const [images, setImages] = useState<string[]>([]);
-
   useEffect(() => {
-    const getImages = async () => {
-      const images: string[] = [];
-      for (let i = 0; i < activeTravelCardInfo!.images.length; i++) {
-        const url =
-          "https://res.cloudinary.com/dq0x2a3gj/image/upload/v1707244671/" +
-          activeTravelCardInfo!.images[i] +
-          ".jpg";
-        await fetch(url).then((response) => {
-          images.push(response.url);
-        });
-      }
-      setImages(images);
-    };
-    getImages();
-
-    setImages([]);
-
     const keyDownHandler = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isModalOpen) {
         e.preventDefault();
@@ -113,7 +89,7 @@ export default function DiaryDetailsModal() {
             }}
             modules={[EffectCoverflow, Pagination, Navigation]}
           >
-            {images.map((image, i) => (
+            {activeTravelCardInfo!.images.map((image, i) => (
               <SwiperSlide key={i}>
                 <StyledImage
                   key={i}

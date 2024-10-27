@@ -58,11 +58,15 @@ export default function TravelCards({
 
             if (areLimited) {
               const sortedData = handleSort(data);
-              setDiaries(
-                sortedData
-                  .slice(sortedData.length - 3, sortedData.length)
-                  .reverse()
-              );
+              if (sortedData.length < 4) {
+                setDiaries(sortedData.reverse());
+              } else {
+                setDiaries(
+                  sortedData
+                    .slice(sortedData.length - 3, sortedData.length)
+                    .reverse()
+                );
+              }
             } else {
               const sortedData = handleSort(filteredData);
               setDiaries(sortedData.reverse());
