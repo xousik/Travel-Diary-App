@@ -8,7 +8,7 @@ const Sentence = styled.p`
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   text-align: center;
   width: 40rem;
-  margin: 0 auto 6rem auto;
+  margin: 0 auto 4rem auto;
 `;
 
 export default function LoginPageSentence() {
