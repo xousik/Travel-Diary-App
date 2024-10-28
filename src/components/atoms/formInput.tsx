@@ -11,6 +11,10 @@ const Wrapper = styled.div`
   height: 5rem;
   position: relative;
   margin-bottom: 1rem;
+
+  @media (max-width: 576px) {
+    width: 100%;
+  }
 `;
 
 const Input = styled.input`

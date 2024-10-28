@@ -12,6 +12,13 @@ const Title = styled.h1<{ $issmall?: number; $isnavtitle?: number }>`
     $isnavtitle ? "0" : $issmall ? "1rem" : "5rem"};
   padding-left: ${({ $issmall }) => ($issmall ? "1rem" : "0")};
   margin-bottom: ${({ $isnavtitle }) => ($isnavtitle ? "0" : "2rem")};
+
+  @media (max-width: 576px) {
+    font-size: ${({ theme, $issmall }) =>
+      $issmall ? theme.fontSize.l : theme.fontSize.xxl};
+    width: 100%;
+    padding: 5rem 1rem 0 1rem;
+  }
 `;
 
 export default function MainTitle({

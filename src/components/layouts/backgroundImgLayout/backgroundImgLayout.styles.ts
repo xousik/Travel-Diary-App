@@ -23,6 +23,10 @@ export const OuterWrapper = styled.div`
   height: calc(90% - 2rem);
   margin: auto;
   perspective: 1000px;
+
+  @media (max-width: 576px) {
+    display: none;
+  }
 `;
 
 export const InnerWrapper = styled.div<{ $isactive: number }>`
@@ -53,6 +57,10 @@ export const StyledTilt = styled(Tilt)`
 export const Container = styled.div`
   width: 50vw;
   height: 100%;
+
+  @media (max-width: 576px) {
+    flex-grow: 1;
+  }
 `;
 
 export const BackSide = styled.div`

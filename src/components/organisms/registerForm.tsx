@@ -8,6 +8,13 @@ import { signIn } from "next-auth/react";
 import { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
 
+const StyledForm = styled.form`
+  @media (max-width: 576px) {
+    width: 100%;
+    padding: 0 1rem;
+  }
+`;
+
 const InnerWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -59,7 +66,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <form onSubmit={(e: FormEvent) => handleSubmit(e)}>
+    <StyledForm onSubmit={(e: FormEvent) => handleSubmit(e)}>
       <Input
         name="E-mail"
         inputType="email"
@@ -73,6 +80,6 @@ export default function RegisterForm() {
           Sign Up
         </PrimaryButton>
       </InnerWrapper>
-    </form>
+    </StyledForm>
   );
 }

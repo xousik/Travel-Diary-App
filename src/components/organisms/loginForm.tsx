@@ -7,6 +7,13 @@ import PrimaryButton from "../atoms/primaryButton";
 import { signIn } from "next-auth/react";
 import { FormEvent, useRef } from "react";
 
+const StyledForm = styled.form`
+  @media (max-width: 576px) {
+    width: 100%;
+    padding: 0 1rem;
+  }
+`;
+
 const InnerWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -33,7 +40,7 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <StyledForm onSubmit={(e) => handleSubmit(e)}>
       <Input
         name="E-mail"
         inputType="email"
@@ -46,6 +53,6 @@ export default function LoginForm() {
           Sign In
         </PrimaryButton>
       </InnerWrapper>
-    </form>
+    </StyledForm>
   );
 }

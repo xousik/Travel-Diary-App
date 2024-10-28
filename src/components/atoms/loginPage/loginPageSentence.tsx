@@ -9,6 +9,13 @@ const Sentence = styled.p`
   text-align: center;
   width: 40rem;
   margin: 0 auto 4rem auto;
+
+  @media (max-width: 576px) {
+    width: 100%;
+    font-size: ${({ theme }) => theme.fontSize.l};
+    margin: 1rem auto 5rem auto;
+    padding: 0 1rem;
+  }
 `;
 
 export default function LoginPageSentence() {
