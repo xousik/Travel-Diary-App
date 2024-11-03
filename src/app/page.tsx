@@ -4,7 +4,7 @@ import LoginForm from "../components/organisms/loginForm";
 import LoginPageSentence from "../components/atoms/loginPage/loginPageSentence";
 import { LoginPageWrapper } from "../components/atoms/loginPage/loginPageWrapper";
 
-export default async function Home() {
+export default function Home() {
   return (
     <BackgroundImgLayout>
       <LoginPageWrapper>
