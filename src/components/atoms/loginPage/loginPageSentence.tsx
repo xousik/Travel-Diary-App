@@ -11,8 +11,11 @@ const Sentence = styled.p`
   margin: 0 auto 4rem auto;
 
   @media (max-width: 576px) {
+    visibility: hidden;
     width: 100%;
+    color: ${({ theme }) => theme.colors.black};
     font-size: ${({ theme }) => theme.fontSize.l};
+    text-shadow: 0px 0px 5px rgba(236, 236, 236, 1);
     margin: 1rem auto 5rem auto;
     padding: 0 1rem;
   }

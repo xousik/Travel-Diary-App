@@ -16,8 +16,11 @@ const Title = styled.h1<{ $issmall?: number; $isnavtitle?: number }>`
   @media (max-width: 576px) {
     font-size: ${({ theme, $issmall }) =>
       $issmall ? theme.fontSize.l : theme.fontSize.xxl};
+    font-weight: ${({ theme }) => theme.fontWeight.semiBold};
+    color: ${({ theme }) => theme.colors.black};
+    text-shadow: 0px 0px 5px rgba(236, 236, 236, 1);
     width: 100%;
-    padding: 5rem 1rem 0 1rem;
+    padding: 1rem 1rem 0 1rem;
   }
 `;
 

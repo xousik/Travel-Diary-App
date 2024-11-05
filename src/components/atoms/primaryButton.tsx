@@ -26,6 +26,13 @@ const Button = styled.button<{
   &:hover {
     background-color: rgba(52, 27, 7, 0.8);
   }
+
+  @media (max-width: 576px) {
+    font-size: ${({ theme }) => theme.fontSize.xs};
+    width: 6rem;
+    height: 3rem;
+    padding: 0;
+  }
 `;
 
 type ButtonProps = {

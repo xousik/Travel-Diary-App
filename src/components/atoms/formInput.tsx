@@ -14,6 +14,8 @@ const Wrapper = styled.div`
 
   @media (max-width: 576px) {
     width: 100%;
+    height: 3.5rem;
+    margin-bottom: 0.5rem;
   }
 `;
 
@@ -55,6 +57,18 @@ const Input = styled.input`
       opacity: 0;
     }
   }
+
+  @media (max-width: 576px) {
+    border: none;
+    box-shadow: inset 0px 0px 5px 1px rgba(66, 68, 90, 1);
+    font-size: ${({ theme }) => theme.fontSize.s};
+    font-weight: ${({ theme }) => theme.fontWeight.semiBold};
+    padding-right: 2rem;
+
+    &::placeholder {
+      font-size: ${({ theme }) => theme.fontSize.s};
+    }
+  }
 `;
 
 const Svg = styled(Image)`
@@ -63,6 +77,12 @@ const Svg = styled(Image)`
   position: absolute;
   height: inherit;
   padding-left: 0.7rem;
+
+  @media (max-width: 576px) {
+    width: 2.5rem;
+    height: 2.5rem;
+    height: inherit;
+  }
 `;
 
 function chooseIcon(inputType: string) {
