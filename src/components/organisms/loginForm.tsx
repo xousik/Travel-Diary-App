@@ -10,7 +10,7 @@ import { FormEvent, useRef } from "react";
 const StyledForm = styled.form`
   @media (max-width: 576px) {
     width: 100%;
-    padding: 8.5rem 1rem;
+    padding: 4.5rem 1rem 0 1rem;
   }
 `;
 

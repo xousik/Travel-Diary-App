@@ -7,7 +7,7 @@ export const Wrapper = styled.div<{ $isloged: number }>`
   justify-content: space-between;
   height: ${({ $isloged }) => ($isloged ? "92%" : "100%")};
   width: 100%;
-  overflow-y: hidden;
+  overflow: hidden;
 `;
 
 export const StyledImage = styled(Image)<{ $isloged: number }>`
@@ -20,12 +20,12 @@ export const StyledImage = styled(Image)<{ $isloged: number }>`
     width: 91%;
     height: 52%;
     margin: 0 auto;
-    margin-bottom: 7rem;
+    margin-bottom: 6.5rem;
     box-shadow: 0px 0px 15px 5px #ececec;
   }
 `;
 
-export const OuterWrapper = styled.div`
+export const OuterWrapper = styled.div<{ $isloged: number }>`
   background-color: transparent;
   width: calc(40% - 1rem);
   height: calc(90% - 2rem);
@@ -33,18 +33,11 @@ export const OuterWrapper = styled.div`
   perspective: 1000px;
 
   @media (max-width: 576px) {
+    display: ${({ $isloged }) => ($isloged ? "none" : "block")};
     width: 100%;
     height: 100%;
     position: absolute;
     z-index: -1;
-    background: linear-gradient(
-      180deg,
-      rgb(98, 83, 72) 5%,
-      rgb(161, 120, 104) 40%,
-      rgba(245, 181, 95, 1) 57%,
-      rgba(250, 189, 83, 1) 69%,
-      rgba(223, 214, 204, 1) 85%
-    );
   }
 `;
 

@@ -29,8 +29,9 @@ const Button = styled.button<{
 
   @media (max-width: 576px) {
     font-size: ${({ theme }) => theme.fontSize.xs};
-    width: 6rem;
-    height: 3rem;
+    line-height: 1.4rem;
+    width: 7rem;
+    height: 3.5rem;
     padding: 0;
   }
 `;

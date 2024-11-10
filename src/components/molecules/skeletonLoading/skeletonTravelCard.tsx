@@ -13,6 +13,11 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme.colors.lightGrey};
   box-shadow: 0px 0px 10px 2px rgba(63, 32, 15, 0.8);
   cursor: pointer;
+
+  @media (max-width: 576px) {
+    width: 90vw;
+    height: 7rem;
+  }
 `;
 
 const InnerWrapper = styled.div`
@@ -32,6 +37,15 @@ const InnerWrapper = styled.div`
     height: 2rem;
     background-color: grey;
     border-radius: 0.5rem;
+  }
+
+  @media (max-width: 576px) {
+    width: 30vw;
+    margin-left: -3rem;
+
+    h3 {
+      font-size: ${({ theme }) => theme.fontSize.m};
+    }
   }
 `;
 
