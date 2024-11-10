@@ -32,7 +32,7 @@ export default function BackgroundImgLayout({
   return (
     <Wrapper $isloged={isLoged! ? 1 : 0}>
       <Container>{children}</Container>
-      <OuterWrapper>
+      <OuterWrapper $isloged={isLoged! ? 1 : 0}>
         <InnerWrapper $isactive={isActive ? 1 : 0}>
           <StyledTilt
             tiltReverse={true}

@@ -35,6 +35,12 @@ export const InnerWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 
+  @media (max-width: 576px) {
+    span {
+      margin-left: 3rem;
+    }
+  }
+
   button {
     display: flex;
     align-items: center;

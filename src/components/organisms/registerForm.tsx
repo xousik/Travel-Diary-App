@@ -48,7 +48,7 @@ export default function RegisterForm() {
         body: JSON.stringify(submitData),
         headers: {
           "content-type": "application/json",
-                },
+        },
       });
       if (res.status === 200) {
         signIn("email", {

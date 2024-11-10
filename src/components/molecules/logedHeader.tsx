@@ -16,6 +16,7 @@ const HeaderWrapper = styled.div`
 
 const Wrapper = styled.div`
   display: flex;
+  column-gap: 0.5rem;
 `;
 
 const LogOutButton = styled.button`
@@ -23,6 +24,12 @@ const LogOutButton = styled.button`
   border: none;
   background: transparent;
   margin-right: 1.5rem;
+
+  @media (max-width: 576px) {
+    margin: 0;
+    width: 4rem;
+    height: 4rem;
+  }
 `;
 
 type userName = {

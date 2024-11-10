@@ -12,6 +12,12 @@ const Wrapper = styled.div`
   column-gap: 0.5rem;
   font-size: ${({ theme }) => theme.fontSize.l};
   color: ${({ theme }) => theme.colors.black};
+
+  @media (max-width: 576px) {
+    font-size: ${({ theme }) => theme.fontSize.s};
+    font-weight: ${({ theme }) => theme.fontWeight.medium};
+    column-gap: 0.2rem;
+  }
 `;
 
 type userName = {
@@ -22,7 +28,7 @@ export default function LogedUser({ userName }: userName) {
   return (
     <Wrapper>
       {userName}
-      <Image src={user} alt="user iccon" width={40} />
+      <Image src={user} alt="user iccon" width={30} />
     </Wrapper>
   );
 }
