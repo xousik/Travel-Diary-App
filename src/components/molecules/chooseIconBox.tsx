@@ -23,12 +23,21 @@ const Wrapper = styled.div<{
   border-radius: 20px;
   right: -15rem;
   top: -2rem;
+
+  @media (max-width: 576px) {
+    position: absolute;
+    width: 7rem;
+    height: 7rem;
+    left: 1.5rem;
+    top: 4rem;
+  }
 `;
 
 type ChooseIconBoxProps = {
   isIconBoxActive: boolean;
   onIconSelect: (icon: string) => void;
   setIsIconBoxActive: React.Dispatch<SetStateAction<boolean>>;
+  isMobile: boolean;
 };
 
 // Left it like this or change to export default
@@ -37,6 +46,7 @@ export const ChooseIconBox = ({
   isIconBoxActive,
   onIconSelect,
   setIsIconBoxActive,
+  isMobile,
 }: ChooseIconBoxProps) => {
   const handleIconSelect = (icon: string) => {
     onIconSelect(icon);
@@ -48,29 +58,29 @@ export const ChooseIconBox = ({
       <Image
         src={palmTreeSvg}
         alt="palm tree icon"
-        width={45}
-        height={45}
+        width={isMobile ? "40" : "45"}
+        height={isMobile ? "40" : "45"}
         onClick={() => handleIconSelect("palmTree")}
       />
       <Image
         src={yachtSvg}
         alt="yacht icon"
-        width={45}
-        height={45}
+        width={isMobile ? "40" : "45"}
+        height={isMobile ? "40" : "45"}
         onClick={() => handleIconSelect("yacht")}
       />
       <Image
         src={planeSvg}
         alt="plane icon"
-        width={45}
-        height={45}
+        width={isMobile ? "40" : "45"}
+        height={isMobile ? "40" : "45"}
         onClick={() => handleIconSelect("plane")}
       />
       <Image
         src={mountainSvg}
         alt="mountain icon"
-        width={45}
-        height={45}
+        width={isMobile ? "40" : "45"}
+        height={isMobile ? "40" : "45"}
         onClick={() => handleIconSelect("mountain")}
       />
     </Wrapper>

@@ -38,7 +38,7 @@ export default function CreateNewDiaryForm({
   const [isIconBoxActive, setIsIconBoxActive] = useState<boolean>(false);
   const [isImageBoxActive, setIsImageBoxActive] = useState<boolean>(false);
   const [choosenIcon, setChoosenIcon] = useState<string>("mountain");
-  const [currentPath, setCurrentPath] = useState<string>("");
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -50,7 +50,7 @@ export default function CreateNewDiaryForm({
 
   useEffect(() => {
     const currentPath = window !== undefined ? window.location.pathname : "";
-    setCurrentPath(currentPath);
+    if (currentPath.includes("/newdiary")) setIsMobile(true);
   }, []);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -121,7 +121,7 @@ export default function CreateNewDiaryForm({
         },
       });
 
-      if (currentPath.includes("newdiary")) router.push("/logedin");
+      isMobile && router.push("/logedin");
 
       setIsActive!(false);
       titleInputRef.current!.value = "";
@@ -150,7 +150,13 @@ export default function CreateNewDiaryForm({
         ref={titleInputRef}
       />
       <StyledTextarea placeholder="Description" ref={descriptionInputRef} />
-      <Input required name="date" type="date" ref={dateInputRef} />
+      <Input
+        required
+        name="date"
+        type="date"
+        ref={dateInputRef}
+        placeholder="dd/mm/yyyy"
+      />
       <InnerWrapper>
         <ImageInputContainer>
           {/* AddImageBox should be drag and drop area and Image should has on click function that will triger image upload */}
@@ -158,7 +164,12 @@ export default function CreateNewDiaryForm({
             onClick={() => fileInputRef.current?.click()}
             $isimageboxactive={isImageBoxActive ? 1 : 0}
           >
-            <Image src={plusSvg} alt="plus icon" height={65} width={65} />
+            <Image
+              src={plusSvg}
+              alt="plus icon"
+              height={isMobile ? "55" : "75"}
+              width={isMobile ? "55" : "75"}
+            />
           </AddImageBox>
           <ImageInputLabel onClick={() => setIsImageBoxActive((prev) => !prev)}>
             <Image src={addImg} alt="Add image icon" height={65} width={65} />
@@ -180,6 +191,7 @@ export default function CreateNewDiaryForm({
             height={60}
           />
           <ChooseIconBox
+            isMobile={isMobile}
             isIconBoxActive={isIconBoxActive}
             onIconSelect={setChoosenIcon}
             setIsIconBoxActive={setIsIconBoxActive}

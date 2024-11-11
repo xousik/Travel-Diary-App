@@ -27,6 +27,10 @@ export const Input = styled.input`
     color: ${({ theme }) => theme.colors.darkGrey};
     cursor: pointer;
   }
+
+  @media (max-width: 576px) {
+    font-size: ${({ theme }) => theme.fontSize.xs};
+  }
 `;
 
 export const StyledTextarea = styled.textarea`
@@ -43,6 +47,7 @@ export const StyledTextarea = styled.textarea`
 `;
 
 export const InnerWrapper = styled.div`
+  position: relative;
   display: flex;
   column-gap: 6rem;
   align-items: center;
@@ -92,4 +97,11 @@ export const AddImageBox = styled.div<{ $isimageboxactive?: number }>`
   left: -15rem;
   top: -2rem;
   cursor: pointer;
+
+  @media (max-width: 576px) {
+    width: 7rem;
+    height: 7rem;
+    left: -4.5rem;
+    top: 4.2rem;
+  }
 `;
