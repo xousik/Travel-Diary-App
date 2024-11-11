@@ -3,6 +3,7 @@
 import { SetStateAction, useContext } from "react";
 import styled from "styled-components";
 import { BackgroundImageStateContext } from "@/src/context/backgroundImageStateContext";
+import Link from "next/link";
 
 const Button = styled.button<{
   width?: number;
@@ -36,6 +37,15 @@ const Button = styled.button<{
   }
 `;
 
+const StyledLink = styled(Link)`
+  padding: 0.32rem 0;
+  display: block;
+  text-decoration: none;
+  line-height: 1.4rem;
+  color: ${({ theme }) => theme.colors.white};
+  border-radius: 1rem;
+`;
+
 type ButtonProps = {
   children: string;
   type?: "button" | "submit";
@@ -43,6 +53,7 @@ type ButtonProps = {
   height?: number;
   fontSize?: number;
   isActive: boolean;
+  isMobile?: boolean;
 };
 
 export default function PrimaryButton({
@@ -52,6 +63,7 @@ export default function PrimaryButton({
   height,
   fontSize,
   isActive,
+  isMobile,
 }: ButtonProps) {
   const {
     setIsActive,
@@ -67,7 +79,11 @@ export default function PrimaryButton({
       height={height}
       fontSize={fontSize}
     >
-      {children}
+      {isMobile ? (
+        <StyledLink href={"/logedin/newdiary"}>{children}</StyledLink>
+      ) : (
+        <>{children}</>
+      )}
     </Button>
   );
 }
