@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState, useRef, useContext } from "react";
+import { FormEvent, useState, useRef, useContext, useEffect } from "react";
 import PrimaryButton from "../../atoms/primaryButton";
 import addImg from "@/public/addImg.svg";
 import Image from "next/image";
@@ -23,6 +23,7 @@ import {
 } from "./createNewDiaryForm.styles";
 import { SetStateAction } from "react";
 import { BackgroundImageStateContext } from "@/src/context/backgroundImageStateContext";
+import { useRouter } from "next/navigation";
 
 interface ImageUploadResponse {
   secure_url: string;
@@ -31,19 +32,26 @@ interface ImageUploadResponse {
 export default function CreateNewDiaryForm({
   handleRefresh,
 }: {
-  handleRefresh: () => void;
+  handleRefresh?: () => void;
 }) {
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
-  const [uploadedUrls, setUploadedUrls] = useState<string[]>([]);
   const [isIconBoxActive, setIsIconBoxActive] = useState<boolean>(false);
   const [isImageBoxActive, setIsImageBoxActive] = useState<boolean>(false);
   const [choosenIcon, setChoosenIcon] = useState<string>("mountain");
+  const [currentPath, setCurrentPath] = useState<string>("");
+
+  const router = useRouter();
 
   const {
     setIsActive,
   }: {
     setIsActive?: React.Dispatch<SetStateAction<boolean>>;
   } = useContext(BackgroundImageStateContext);
+
+  useEffect(() => {
+    const currentPath = window !== undefined ? window.location.pathname : "";
+    setCurrentPath(currentPath);
+  }, []);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const titleInputRef = useRef<HTMLInputElement | null>(null);
@@ -113,6 +121,8 @@ export default function CreateNewDiaryForm({
         },
       });
 
+      if (currentPath.includes("newdiary")) router.push("/logedin");
+
       setIsActive!(false);
       titleInputRef.current!.value = "";
       descriptionInputRef.current!.value = "";
@@ -121,7 +131,7 @@ export default function CreateNewDiaryForm({
       setIsIconBoxActive(false);
       setChoosenIcon("mountain");
       setSelectedImages([]);
-      handleRefresh();
+      handleRefresh && handleRefresh();
 
       // TODO: Add some cool pop out box info " Correctly added new Diary! "
     } catch (error) {
