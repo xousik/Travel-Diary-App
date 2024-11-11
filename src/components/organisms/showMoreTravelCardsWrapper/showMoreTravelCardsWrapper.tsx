@@ -18,6 +18,10 @@ const StyledTravelCardsWrapper = styled(TravelCardsWrapper)`
   justify-items: center;
   align-content: start;
   padding: 2rem 0;
+
+  @media (max-width: 576px) {
+    grid-template-columns: max-content;
+  }
 `;
 
 export default function ShowMoreTravelCardsWrapper({
