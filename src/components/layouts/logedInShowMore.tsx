@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import LogedHeader from "@/src/components/molecules/logedHeader";
 import YearNavigation from "@/src/components/molecules/yearNavigation";
@@ -7,9 +7,11 @@ import Image from "next/image";
 import arrowRight from "@/public/arrowRight.svg";
 import DiaryDetailsModal from "../organisms/diaryDetailsModal/diaryDetailsModal";
 import ShowMoreTravelCardsWrapper from "../organisms/showMoreTravelCardsWrapper/showMoreTravelCardsWrapper";
+import { DiaryDetailsModalContext } from "@/src/context/diaryDetailsModalContext";
 
-const OuterWrapper = styled.div`
-  height: fit-content;
+const OuterWrapper = styled.div<{ isModalOpen: boolean }>`
+  height: ${({ isModalOpen }) => (isModalOpen ? "100%" : "fit-content")};
+  overflow: ${({ isModalOpen }) => isModalOpen && "hidden"};
 `;
 
 const Wrapper = styled.div`
@@ -27,10 +29,22 @@ export default function LogedInShowMore({ userName }: { userName: string }) {
   const [activeYear, setActiveYear] = useState<number>(
     new Date().getFullYear()
   );
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  const {
+    isModalOpen,
+  }: {
+    isModalOpen?: boolean;
+  } = useContext(DiaryDetailsModalContext);
+
+  useEffect(() => {
+    const windowWidth = window !== undefined ? window.innerWidth : NaN;
+    if (windowWidth < 426) setIsMobile(true);
+  }, []);
 
   return (
-    <OuterWrapper>
-      <DiaryDetailsModal />
+    <OuterWrapper isModalOpen={isModalOpen!}>
+      <DiaryDetailsModal isMobile={isMobile} />
       <LogedHeader userName={userName!} />
       {/* Year navigation */}
       <YearNavigation activeYear={activeYear} setActiveYear={setActiveYear} />
