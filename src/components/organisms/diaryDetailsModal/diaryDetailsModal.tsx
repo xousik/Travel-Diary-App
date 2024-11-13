@@ -33,7 +33,7 @@ export type DiaryDetailsModalContextProps = {
   isModalOpen?: boolean;
 };
 
-export default function DiaryDetailsModal() {
+export default function DiaryDetailsModal({ isMobile }: { isMobile: boolean }) {
   const {
     activeTravelCardInfo,
     setIsModalOpen,
@@ -67,8 +67,10 @@ export default function DiaryDetailsModal() {
         <StyledButton onClick={() => setIsModalOpen!((prev) => !prev)}>
           <Image src={closeSvg} alt="close icon" width={45} height={45} />
         </StyledButton>
-        <h3>{activeTravelCardInfo!.title}</h3>
-        <p>{activeTravelCardInfo!.description}</p>
+        <div>
+          <h3>{activeTravelCardInfo!.title}</h3>
+          <p>{activeTravelCardInfo!.description}</p>
+        </div>
         <Wrapper>
           <Swiper
             slideToClickedSlide={true}
@@ -76,7 +78,7 @@ export default function DiaryDetailsModal() {
             grabCursor={true}
             centeredSlides={true}
             // loop={true}
-            slidesPerView={3}
+            slidesPerView={isMobile ? 1 : 3}
             coverflowEffect={{
               rotate: 0,
               stretch: -10,

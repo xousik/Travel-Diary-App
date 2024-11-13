@@ -30,7 +30,7 @@ export default function LogedInDefault({ userName }: { userName: string }) {
 
   return (
     <>
-      <DiaryDetailsModal />
+      <DiaryDetailsModal isMobile={isMobile} />
       <LogedHeader userName={userName!} />
       <BackgroundImgLayout isLoged={true} handleRefresh={handleRefresh}>
         <Wrapper>
