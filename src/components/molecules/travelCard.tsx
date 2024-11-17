@@ -13,9 +13,6 @@ import deleteSvg from "@/public/delete.svg";
 
 const Wrapper = styled.div`
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 28rem;
   height: 8rem;
   border-radius: 1rem;
@@ -28,6 +25,16 @@ const Wrapper = styled.div`
     height: 7rem;
   }
 `;
+const IconImage = styled(Image)`
+  position: absolute;
+  right: 4rem;
+  top: 2rem;
+  @media (max-width: 576px) {
+    width: 45px;
+    height: 45px;
+    right: 4rem;
+  }
+`;
 
 const StyledImage = styled(Image)`
   position: absolute;
@@ -36,9 +43,12 @@ const StyledImage = styled(Image)`
 `;
 
 const InnerWrapper = styled.div`
-  width: 10rem;
-  margin-right: 5rem;
-  margin-left: -6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0.5rem 0 0 0.5rem;
+  width: 66%;
+  height: 100%;
   text-align: center;
   color: ${({ theme }) => theme.colors.brown};
   font-weight: ${({ theme }) => theme.fontWeight.semiBold};
@@ -51,9 +61,7 @@ const InnerWrapper = styled.div`
   }
 
   @media (max-width: 576px) {
-    width: 30vw;
-    margin-left: -3rem;
-
+    padding: 0.5rem 0 0 0.5rem;
     h3 {
       font-size: ${({ theme }) => theme.fontSize.m};
     }
@@ -120,7 +128,12 @@ export default function TravelCard({
         <h3>{title}</h3>
         <span>{date}</span>
       </InnerWrapper>
-      <Image src={handleIconSelect(icon!)} alt="mountain icon" width={60} />
+      <IconImage
+        src={handleIconSelect(icon!)}
+        alt="mountain icon"
+        width={55}
+        height={55}
+      />
       <StyledImage
         src={deleteSvg}
         alt="delete icon"

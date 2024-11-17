@@ -1,5 +1,16 @@
 import styled from "styled-components";
 
+export const StyledButton = styled.button`
+  cursor: pointer;
+  position: absolute;
+  padding: 0;
+  background: transparent;
+  border: none;
+  right: 1rem;
+  top: 1rem;
+  outline: none;
+`;
+
 export const StyledForm = styled.form`
   width: 100%;
   height: 100%;
@@ -22,6 +33,12 @@ export const Input = styled.input`
   color: ${({ theme }) => theme.colors.brown};
   text-align: center;
 
+  &:first-child {
+    @media (max-width: 576px) {
+      margin-right: 4.8rem;
+    }
+  }
+
   &:nth-child(3) {
     width: 14rem;
     color: ${({ theme }) => theme.colors.darkGrey};
@@ -30,6 +47,7 @@ export const Input = styled.input`
 
   @media (max-width: 576px) {
     font-size: ${({ theme }) => theme.fontSize.xs};
+    width: 65%;
   }
 `;
 
