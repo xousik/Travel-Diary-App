@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   align-items: center;
   column-gap: 0.5rem;
   font-size: ${({ theme }) => theme.fontSize.l};
-  color: ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colours.black};
 
   @media (max-width: 576px) {
     font-size: ${({ theme }) => theme.fontSize.s};

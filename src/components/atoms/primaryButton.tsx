@@ -12,13 +12,13 @@ const Button = styled.button<{
 }>`
   width: ${({ width }) => (width ? `${width}rem` : "9rem")};
   height: ${({ height }) => (height ? `${height}rem` : "4rem")};
-  background-color: ${({ theme }) => theme.colors.darkBeige};
+  background-color: ${({ theme }) => theme.colours.darkBeige};
   border: none;
   border-radius: 1rem;
   font-size: ${({ theme, fontSize }) =>
     fontSize ? `${fontSize}px` : theme.fontSize.l};
   font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colours.white};
   cursor: pointer;
   transition: background-color 0.4s;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -42,7 +42,7 @@ const StyledLink = styled(Link)`
   display: block;
   text-decoration: none;
   line-height: 1.4rem;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colours.white};
   border-radius: 1rem;
 `;
 

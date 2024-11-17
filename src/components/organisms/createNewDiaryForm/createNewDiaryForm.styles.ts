@@ -25,12 +25,12 @@ export const Input = styled.input`
   height: 4rem;
   width: 70%;
   margin-top: 1rem;
-  border: 0.15rem solid ${({ theme }) => theme.colors.darkGrey};
+  border: 0.15rem solid ${({ theme }) => theme.colours.darkGrey};
   border-radius: 1rem;
   outline: none;
   font-size: ${({ theme }) => theme.fontSize.m};
   padding: 0 1rem;
-  color: ${({ theme }) => theme.colors.brown};
+  color: ${({ theme }) => theme.colours.brown};
   text-align: center;
 
   &:first-child {
@@ -41,7 +41,7 @@ export const Input = styled.input`
 
   &:nth-child(3) {
     width: 14rem;
-    color: ${({ theme }) => theme.colors.darkGrey};
+    color: ${({ theme }) => theme.colours.darkGrey};
     cursor: pointer;
   }
 
@@ -52,12 +52,12 @@ export const Input = styled.input`
 `;
 
 export const StyledTextarea = styled.textarea`
-  border: 0.15rem solid ${({ theme }) => theme.colors.darkGrey};
+  border: 0.15rem solid ${({ theme }) => theme.colours.darkGrey};
   border-radius: 1rem;
   outline: none;
   font-size: ${({ theme }) => theme.fontSize.m};
   padding: 0 1rem;
-  color: ${({ theme }) => theme.colors.brown};
+  color: ${({ theme }) => theme.colours.brown};
   text-align: center;
   width: 85%;
   height: 35%;
@@ -109,7 +109,7 @@ export const AddImageBox = styled.div<{ $isimageboxactive?: number }>`
   justify-content: center;
   width: 13rem;
   height: 10rem;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colours.background};
   box-shadow: inset 0px 0px 10px 0px #a78453;
   border-radius: 20px;
   left: -15rem;

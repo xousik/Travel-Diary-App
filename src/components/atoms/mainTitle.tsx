@@ -6,7 +6,7 @@ const Title = styled.h1<{ $issmall?: number; $isnavtitle?: number }>`
   font-size: ${({ theme, $issmall }) =>
     $issmall ? theme.fontSize.xl : theme.fontSize.xxxl};
   font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-  color: ${({ theme }) => theme.colors.darkBeige};
+  color: ${({ theme }) => theme.colours.darkBeige};
   text-align: ${({ $issmall }) => ($issmall ? "start" : "center")};
   padding-top: ${({ $issmall, $isnavtitle }) =>
     $isnavtitle ? "0" : $issmall ? "1rem" : "5rem"};
@@ -16,7 +16,7 @@ const Title = styled.h1<{ $issmall?: number; $isnavtitle?: number }>`
   @media (max-width: 576px) {
     font-size: ${({ theme, $issmall }) =>
       $issmall ? theme.fontSize.m : theme.fontSize.xxl};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colours.black};
     text-shadow: 0px 0px 5px rgba(236, 236, 236, 1);
     width: 100%;
     padding: ${({ $issmall }) => ($issmall ? "0 1rem" : "1rem 1rem 0 1rem")};

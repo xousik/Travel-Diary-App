@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   width: 28rem;
   height: 8rem;
   border-radius: 1rem;
-  background: ${({ theme }) => theme.colors.lightGrey};
+  background: ${({ theme }) => theme.colours.lightGrey};
   box-shadow: 0px 0px 10px 2px rgba(63, 32, 15, 0.8);
   cursor: pointer;
 
@@ -25,7 +25,7 @@ const InnerWrapper = styled.div`
   margin-right: 5rem;
   margin-left: -4rem;
   text-align: center;
-  color: ${({ theme }) => theme.colors.brown};
+  color: ${({ theme }) => theme.colours.brown};
   font-weight: ${({ theme }) => theme.fontWeight.semiBold};
   display: flex;
   flex-direction: column;
