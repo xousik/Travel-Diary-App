@@ -61,10 +61,11 @@ export default function CreateNewDiaryForm({
   const dateInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+    // const file = event.target.files?.[0];
 
-    if (file) {
-      selectedImages.push(file);
+    if (event.target.files) {
+      const newFiles = Array.from(event.target.files);
+      setSelectedImages((prevImages) => [...prevImages, ...newFiles]);
       setIsImageBoxActive(false);
     }
   };
@@ -194,6 +195,7 @@ export default function CreateNewDiaryForm({
               ref={fileInputRef}
               name="image"
               type="file"
+              multiple
               accept="image/*"
               onChange={handleImageChange}
             />
