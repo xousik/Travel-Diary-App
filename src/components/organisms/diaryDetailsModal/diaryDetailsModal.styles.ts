@@ -23,12 +23,12 @@ export const Modal = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) => theme.colours.background};
   width: 85%;
   height: 90%;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  color: ${({ theme }) => theme.colors.brown};
+  color: ${({ theme }) => theme.colours.brown};
 
   @media (max-width: 576px) {
     padding: 1rem 0 0.5rem 0;
@@ -124,16 +124,16 @@ export const Wrapper = styled.div`
       height: 1rem;
       display: inline-block;
       border-radius: 50%;
-      background: ${({ theme }) => theme.colors.darkBeige};
+      background: ${({ theme }) => theme.colours.darkBeige};
       opacity: 0.2;
-      border: 1px solid ${({ theme }) => theme.colors.darkBeige};
+      border: 1px solid ${({ theme }) => theme.colours.darkBeige};
       margin: 0 5px;
       box-shadow: none;
       transform: scale(0.8);
       &:hover,
       &-active {
-        background-color: ${({ theme }) => theme.colors.darkBeige};
-        border-color: ${({ theme }) => theme.colors.darkBeige};
+        background-color: ${({ theme }) => theme.colours.darkBeige};
+        border-color: ${({ theme }) => theme.colours.darkBeige};
         transform: scale(1);
         opacity: 1;
       }

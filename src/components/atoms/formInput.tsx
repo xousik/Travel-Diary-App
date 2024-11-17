@@ -24,16 +24,16 @@ const Input = styled.input`
   width: inherit;
   height: inherit;
   border-radius: 1rem;
-  border: 0.15rem solid ${({ theme }) => theme.colors.darkGrey};
+  border: 0.15rem solid ${({ theme }) => theme.colours.darkGrey};
   outline: none;
   font-size: ${({ theme }) => theme.fontSize.l};
   padding-left: 3.5rem;
-  color: ${({ theme }) => theme.colors.brown};
+  color: ${({ theme }) => theme.colours.brown};
   text-align: center;
   padding-right: 3.5rem;
 
   &::placeholder {
-    color: ${({ theme }) => theme.colors.lightGrey};
+    color: ${({ theme }) => theme.colours.lightGrey};
     font-size: ${({ theme }) => theme.fontSize.m};
     text-align: start;
     transition: opacity;
@@ -49,7 +49,7 @@ const Input = styled.input`
   }
 
   &:-webkit-autofill {
-    -webkit-text-fill-color: ${({ theme }) => theme.colors.brown} !important;
+    -webkit-text-fill-color: ${({ theme }) => theme.colours.brown} !important;
   }
 
   &:focus {

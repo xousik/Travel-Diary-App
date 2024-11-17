@@ -22,7 +22,7 @@ const InnerWrapper = styled.div`
 `;
 
 const LoginLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.darkBeige};
+  color: ${({ theme }) => theme.colours.darkBeige};
   font-size: ${({ theme }) => theme.fontSize.s};
   font-weight: ${({ theme }) => theme.fontWeight.bold};
   text-decoration: none;

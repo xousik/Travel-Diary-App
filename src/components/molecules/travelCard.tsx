@@ -46,11 +46,11 @@ const InnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 0.5rem 0 0 0.5rem;
+  padding: 0rem 0 0.5rem 0.5rem;
   width: 66%;
   height: 100%;
   text-align: center;
-  color: ${({ theme }) => theme.colors.brown};
+  color: ${({ theme }) => theme.colours.brown};
   font-weight: ${({ theme }) => theme.fontWeight.semiBold};
 
   h3 {
@@ -58,12 +58,13 @@ const InnerWrapper = styled.div`
   }
   span {
     font-size: ${({ theme }) => theme.fontSize.s};
+    color: ${({ theme }) => theme.colours.black};
   }
 
   @media (max-width: 576px) {
-    padding: 0.5rem 0 0 0.5rem;
+    padding: 0.5rem 0 0.5rem 0.5rem;
     h3 {
-      font-size: ${({ theme }) => theme.fontSize.m};
+      font-size: ${({ theme }) => theme.fontSize.s};
     }
   }
 `;

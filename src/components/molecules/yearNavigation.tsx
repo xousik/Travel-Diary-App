@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   font-size: ${({ theme }) => theme.fontSize.s};
 
   h2 {
-    color: ${({ theme }) => theme.colors.brown};
+    color: ${({ theme }) => theme.colours.brown};
   }
 `;
 

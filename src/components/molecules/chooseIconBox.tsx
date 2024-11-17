@@ -18,7 +18,7 @@ const Wrapper = styled.div<{
   position: absolute;
   width: 13rem;
   height: 10rem;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colours.background};
   box-shadow: inset 0px 0px 10px 0px #a78453;
   border-radius: 20px;
   right: -15rem;
