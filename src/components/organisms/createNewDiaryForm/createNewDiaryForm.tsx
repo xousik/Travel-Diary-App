@@ -9,8 +9,10 @@ import palmTreeSvg from "@/public/palmTree.svg";
 import yachtSvg from "@/public/yacht.svg";
 import planeSvg from "@/public/plane.svg";
 import plusSvg from "@/public/plus.svg";
+import closeSvg from "@/public/close.svg";
 import { ChooseIconBox } from "../../molecules/chooseIconBox";
 import {
+  StyledButton,
   StyledForm,
   Input,
   StyledTextarea,
@@ -140,67 +142,82 @@ export default function CreateNewDiaryForm({
     }
   };
 
+  const handleCloseForm = () => {
+    if (isMobile) {
+      router.push("/logedin");
+    }
+    setIsActive!(false);
+  };
+
   return (
-    <StyledForm onSubmit={(e) => handleSubmit(e)}>
-      <Input
-        required
-        name="Title"
-        type="title"
-        placeholder="Title"
-        ref={titleInputRef}
-      />
-      <StyledTextarea placeholder="Description" ref={descriptionInputRef} />
-      <Input
-        required
-        name="date"
-        type="date"
-        ref={dateInputRef}
-        placeholder="dd/mm/yyyy"
-      />
-      <InnerWrapper>
-        <ImageInputContainer>
-          {/* AddImageBox should be drag and drop area and Image should has on click function that will triger image upload */}
-          <AddImageBox
-            onClick={() => fileInputRef.current?.click()}
-            $isimageboxactive={isImageBoxActive ? 1 : 0}
-          >
-            <Image
-              src={plusSvg}
-              alt="plus icon"
-              height={isMobile ? "55" : "75"}
-              width={isMobile ? "55" : "75"}
+    <>
+      <StyledButton onClick={handleCloseForm}>
+        <Image src={closeSvg} alt="close icon" width={45} height={45} />
+      </StyledButton>
+      <StyledForm onSubmit={(e) => handleSubmit(e)}>
+        <Input
+          required
+          name="Title"
+          type="title"
+          placeholder="Title"
+          ref={titleInputRef}
+          maxLength={35}
+        />
+        <StyledTextarea placeholder="Description" ref={descriptionInputRef} />
+        <Input
+          required
+          name="date"
+          type="date"
+          ref={dateInputRef}
+          placeholder="dd/mm/yyyy"
+        />
+        <InnerWrapper>
+          <ImageInputContainer>
+            {/* AddImageBox should be drag and drop area and Image should has on click function that will triger image upload */}
+            <AddImageBox
+              onClick={() => fileInputRef.current?.click()}
+              $isimageboxactive={isImageBoxActive ? 1 : 0}
+            >
+              <Image
+                src={plusSvg}
+                alt="plus icon"
+                height={isMobile ? "55" : "75"}
+                width={isMobile ? "55" : "75"}
+              />
+            </AddImageBox>
+            <ImageInputLabel
+              onClick={() => setIsImageBoxActive((prev) => !prev)}
+            >
+              <Image src={addImg} alt="Add image icon" height={65} width={65} />
+            </ImageInputLabel>
+            <ImageInput
+              ref={fileInputRef}
+              name="image"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
             />
-          </AddImageBox>
-          <ImageInputLabel onClick={() => setIsImageBoxActive((prev) => !prev)}>
-            <Image src={addImg} alt="Add image icon" height={65} width={65} />
-          </ImageInputLabel>
-          <ImageInput
-            ref={fileInputRef}
-            name="image"
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-        </ImageInputContainer>
-        <ChooseIconWrapper>
-          <Image
-            onClick={() => setIsIconBoxActive((prev) => !prev)}
-            src={handleIconSelect(choosenIcon!)}
-            alt="mountain icon"
-            width={60}
-            height={60}
-          />
-          <ChooseIconBox
-            isMobile={isMobile}
-            isIconBoxActive={isIconBoxActive}
-            onIconSelect={setChoosenIcon}
-            setIsIconBoxActive={setIsIconBoxActive}
-          />
-        </ChooseIconWrapper>
-      </InnerWrapper>
-      <PrimaryButton type="submit" isActive={false}>
-        Add diary
-      </PrimaryButton>
-    </StyledForm>
+          </ImageInputContainer>
+          <ChooseIconWrapper>
+            <Image
+              onClick={() => setIsIconBoxActive((prev) => !prev)}
+              src={handleIconSelect(choosenIcon!)}
+              alt="mountain icon"
+              width={60}
+              height={60}
+            />
+            <ChooseIconBox
+              isMobile={isMobile}
+              isIconBoxActive={isIconBoxActive}
+              onIconSelect={setChoosenIcon}
+              setIsIconBoxActive={setIsIconBoxActive}
+            />
+          </ChooseIconWrapper>
+        </InnerWrapper>
+        <PrimaryButton type="submit" isActive={false}>
+          Add diary
+        </PrimaryButton>
+      </StyledForm>
+    </>
   );
 }

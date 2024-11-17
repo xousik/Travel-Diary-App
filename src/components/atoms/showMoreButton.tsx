@@ -14,6 +14,7 @@ const Button = styled.button`
   text-decoration: none;
   font-size: ${({ theme }) => theme.fontSize.xs};
   font-weight: ${({ theme }) => theme.fontWeight.bold};
+  color: ${({ theme }) => theme.colors.black};
 `;
 
 type setIsActive = (
