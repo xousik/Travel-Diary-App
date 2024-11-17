@@ -21,6 +21,12 @@ const Title = styled.h1<{ $issmall?: number; $isnavtitle?: number }>`
     width: 100%;
     padding: ${({ $issmall }) => ($issmall ? "0 1rem" : "1rem 1rem 0 1rem")};
   }
+
+  @media (max-width: 386px) {
+    font-size: ${({ theme, $issmall }) =>
+      $issmall ? theme.fontSize.m : theme.fontSize.xl};
+    margin-bottom: ${({ $isnavtitle }) => ($isnavtitle ? "0" : ".5rem")};
+  }
 `;
 
 export default function MainTitle({
