@@ -23,6 +23,11 @@ export const StyledImage = styled(Image)<{ $isloged: number }>`
     margin-bottom: 6.5rem;
     box-shadow: 0px 0px 15px 5px #ececec;
   }
+
+  @media (max-width: 386px) {
+    height: 50%;
+    margin-bottom: 8rem;
+  }
 `;
 
 export const OuterWrapper = styled.div<{ $isloged: number }>`

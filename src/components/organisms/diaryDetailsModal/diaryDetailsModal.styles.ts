@@ -44,6 +44,10 @@ export const Modal = styled.div`
       font-size: ${({ theme }) => theme.fontSize.l};
       width: 82%;
     }
+
+    @media (max-width: 386px) {
+      font-size: ${({ theme }) => theme.fontSize.m};
+    }
   }
 
   p {
@@ -151,5 +155,9 @@ export const StyledImage = styled(Image)`
   @media (max-width: 576px) {
     width: 13rem;
     height: 15rem;
+  }
+
+  @media (max-width: 576px) {
+    height: 13rem;
   }
 `;
