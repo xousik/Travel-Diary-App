@@ -14,11 +14,11 @@ export const StyledButton = styled.button`
 export const StyledForm = styled.form`
   width: 100%;
   height: 100%;
-  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 9;
+  padding-bottom: 1rem;
 `;
 
 export const Input = styled.input`
@@ -52,6 +52,7 @@ export const Input = styled.input`
 `;
 
 export const StyledTextarea = styled.textarea`
+  resize: none;
   border: 0.15rem solid ${({ theme }) => theme.colours.darkGrey};
   border-radius: 1rem;
   outline: none;
@@ -61,7 +62,7 @@ export const StyledTextarea = styled.textarea`
   text-align: center;
   width: 85%;
   height: 35%;
-  margin-top: 2rem;
+  margin-top: 1rem;
 `;
 
 export const InnerWrapper = styled.div`
@@ -70,7 +71,7 @@ export const InnerWrapper = styled.div`
   column-gap: 6rem;
   align-items: center;
   justify-content: center;
-  margin: 3rem 0 5rem 0;
+  margin: 2rem 0 4rem 0;
 `;
 
 export const ImageInputContainer = styled.div`
@@ -115,6 +116,12 @@ export const AddImageBox = styled.div<{ $isimageboxactive?: number }>`
   left: -15rem;
   top: -2rem;
   cursor: pointer;
+
+  @media (max-height: 730px) {
+    width: 9rem;
+    height: 9rem;
+    left: -9.5rem;
+  }
 
   @media (max-width: 576px) {
     width: 7rem;

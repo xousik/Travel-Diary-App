@@ -24,6 +24,10 @@ const Wrapper = styled.div`
     width: 90vw;
     height: 7rem;
   }
+
+  @media (max-height: 730px) {
+    height: 7rem;
+  }
 `;
 const IconImage = styled(Image)`
   position: absolute;
@@ -55,6 +59,11 @@ const InnerWrapper = styled.div`
 
   h3 {
     font-size: ${({ theme }) => theme.fontSize.l};
+
+    @media (max-height: 730px) {
+      line-height: 2.2rem;
+      margin: 0.2rem 0 0 0.2rem;
+    }
   }
   span {
     font-size: ${({ theme }) => theme.fontSize.s};
