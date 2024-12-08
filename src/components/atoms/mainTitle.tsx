@@ -8,8 +8,8 @@ const Title = styled.h1<{ $issmall?: number; $isnavtitle?: number }>`
   font-weight: ${({ theme }) => theme.fontWeight.semiBold};
   color: ${({ theme }) => theme.colours.darkBeige};
   text-align: ${({ $issmall }) => ($issmall ? "start" : "center")};
-  padding-top: ${({ $issmall, $isnavtitle }) =>
-    $isnavtitle ? "0" : $issmall ? "1rem" : "5rem"};
+  /* padding-top: ${({ $issmall, $isnavtitle }) =>
+    $isnavtitle ? "0" : $issmall ? "1rem" : "5rem"}; */
   padding-left: ${({ $issmall }) => ($issmall ? "1rem" : "0")};
   margin-bottom: ${({ $isnavtitle }) => ($isnavtitle ? "0" : "2rem")};
 

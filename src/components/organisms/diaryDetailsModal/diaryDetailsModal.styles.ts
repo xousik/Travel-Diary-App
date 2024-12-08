@@ -38,11 +38,11 @@ export const Modal = styled.div`
     font-size: ${({ theme }) => theme.fontSize.xxl};
     text-align: center;
     margin: 0 auto;
-    margin-bottom: 2rem;
 
     @media (max-width: 576px) {
       font-size: ${({ theme }) => theme.fontSize.l};
       width: 82%;
+      margin-bottom: 3rem;
     }
 
     @media (max-width: 386px) {
@@ -52,17 +52,24 @@ export const Modal = styled.div`
 
   p {
     width: 60rem;
-    margin: 0 auto;
+    height: 8rem;
+    margin: 1rem auto;
     font-size: ${({ theme }) => theme.fontSize.m};
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-    padding: 1rem;
+    padding: 0 1rem;
     text-align: center;
+    overflow: scroll;
+    scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     @media (max-width: 576px) {
       padding: 0 0.5rem;
       font-size: ${({ theme }) => theme.fontSize.s};
       height: 8rem;
-      width: 100%;
+      width: 100vw;
       line-height: 2rem;
       overflow: auto;
       align-self: center;
@@ -119,7 +126,7 @@ export const Wrapper = styled.div`
 
   .swiper-pagination {
     position: relative !important;
-    margin-top: 7rem;
+    margin-top: 4rem;
     width: auto;
     height: auto;
     &-bullet {
@@ -152,12 +159,13 @@ export const Wrapper = styled.div`
 export const StyledImage = styled(Image)`
   border-radius: 20px;
 
-  @media (max-width: 576px) {
-    width: 13rem;
-    height: 15rem;
+  @media (max-height: 730px) {
+    width: 17rem;
+    height: 17rem;
   }
 
   @media (max-width: 576px) {
+    width: 13rem;
     height: 13rem;
   }
 `;

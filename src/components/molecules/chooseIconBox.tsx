@@ -24,6 +24,12 @@ const Wrapper = styled.div<{
   right: -15rem;
   top: -2rem;
 
+  @media (max-height: 730px) {
+    width: 9rem;
+    height: 9rem;
+    right: -9.5rem;
+  }
+
   @media (max-width: 576px) {
     position: absolute;
     width: 7rem;

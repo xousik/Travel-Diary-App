@@ -14,6 +14,10 @@ const Wrapper = styled.div`
   box-shadow: 0px 0px 10px 2px rgba(63, 32, 15, 0.8);
   cursor: pointer;
 
+  @media (max-height: 730px) {
+    height: 7rem;
+  }
+
   @media (max-width: 576px) {
     width: 90vw;
     height: 7rem;
