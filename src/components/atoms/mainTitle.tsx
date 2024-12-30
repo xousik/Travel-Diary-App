@@ -22,10 +22,11 @@ const Title = styled.h1<{ $issmall?: number; $isnavtitle?: number }>`
     padding: ${({ $issmall }) => ($issmall ? "0 1rem" : "1rem 1rem 0 1rem")};
   }
 
-  @media (max-width: 386px) {
+  @media (max-width: 400px) {
     font-size: ${({ theme, $issmall }) =>
       $issmall ? theme.fontSize.m : theme.fontSize.xl};
     margin-bottom: ${({ $isnavtitle }) => ($isnavtitle ? "0" : ".5rem")};
+    margin-top: 0;
   }
 `;
 

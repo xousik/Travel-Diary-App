@@ -45,7 +45,7 @@ export const Modal = styled.div`
       margin-bottom: 3rem;
     }
 
-    @media (max-width: 386px) {
+    @media (max-width: 400px) {
       font-size: ${({ theme }) => theme.fontSize.m};
     }
   }
