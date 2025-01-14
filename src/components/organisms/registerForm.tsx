@@ -13,6 +13,10 @@ const StyledForm = styled.form`
     width: 100%;
     padding: 4.5rem 1rem 0 1rem;
   }
+
+  @media (max-width: 400px) {
+    margin: 2.5rem 1rem 0 1rem;
+  }
 `;
 
 const InnerWrapper = styled.div`

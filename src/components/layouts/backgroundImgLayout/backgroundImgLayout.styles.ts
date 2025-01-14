@@ -24,7 +24,7 @@ export const StyledImage = styled(Image)<{ $isloged: number }>`
     box-shadow: 0px 0px 15px 5px #ececec;
   }
 
-  @media (max-width: 386px) {
+  @media (max-width: 400px) {
     height: 50%;
     margin-bottom: 8rem;
   }
